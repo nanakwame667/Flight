@@ -22,6 +22,11 @@ function HomeForm (){
         <br/>
         <HomeCards/>
         <br/><br/>
+        <div style={{textAlign:'center',marginTop:'50px'}}>
+        <h3 style={{fontSize:'35px',weight:'bold'}}>Trending Cities</h3>
+        <p style={{fontSize:'25px'}} >The most searched cities on Flight-Booky</p>
+        </div>
+        <br/><br/>
         <footer>
         <HomeFooter/>
         </footer>

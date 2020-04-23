@@ -1,11 +1,10 @@
 import React,{useState} from 'react';
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import {Button} from 'react-bootstrap';
+
+import {Form,Container,Modal,Button} from 'react-bootstrap';
 
 function LoginForm (props){
     const [validated, setValidated] = useState(false);
-
+  
     const handleSubmit = (event) => {
       const form = event.currentTarget;
       if (form.checkValidity() === false) {
@@ -16,12 +15,18 @@ function LoginForm (props){
       setValidated(true);
     };
     return(
-       
-        <Container>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      
+    >
+        <Container style={{width:'400px',height:'600px'}} fluid>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}style={{justifyContent:'center',alignItems:'center',marginTop:'60px'}}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control required type="email" placeholder="Enter email" />
+    <Form.Control required type="email" placeholder="Enter email" style={{width:'400px'}} />
     <Form.Text className="text-muted">
       Example: example@example.com
     </Form.Text>
@@ -29,10 +34,10 @@ function LoginForm (props){
     Please enter a valid email address.
   </Form.Control.Feedback>
   </Form.Group>
-
+  
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control required type="password" placeholder="Password" />
+    <Form.Control required type="password" placeholder="Password" style={{width:'400px'}}/>
     <Form.Control.Feedback type="invalid">
     Please enter a correct password
   </Form.Control.Feedback>
@@ -43,9 +48,10 @@ function LoginForm (props){
   <Button variant="primary" type="submit">
     Sign In
   </Button>
-</Form>
+  </Form>
         </Container>
+        </Modal>
     )
-}
-
-export default LoginForm;
+  }
+  
+  export default LoginForm;

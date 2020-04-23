@@ -1,11 +1,12 @@
 import React from 'react';
-import LoginForm from './../forms/LoginForm';
+
+import Login from './../navs/login-nav';
 
 function LoginPage (){
     
         return(
             <div>
-            <LoginForm/>
+            <Login/>
             </div>
         )
     }

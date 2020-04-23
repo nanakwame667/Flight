@@ -1,56 +1,50 @@
 import React from 'react';
 
-import {Card,CardDeck} from 'react-bootstrap';
+import {Card,CardDeck,Container,Button} from 'react-bootstrap';
 
 
 function HomeCards (){
     return(
-        <CardDeck collapseOnselect style={{width:'60%',marginLeft:'300px', alignContent:'center'}}>
-        <Card style={{height:'60%'}}>
-        <Card.Img variant="top" src={require('../../../Images/tour3.jpg')}  />
+      <Container fluid>
+        <CardDeck collapseOnselect style={{width:'80%',marginLeft:'160px', alignContent:'center'}}>
+        <Card style={{height:'70%'}}>
+          <Card.Img variant="top" src={require('../../../Images/people.jpg')} style={{height:'200px'}} />
+          <Card.Body>
+            <small className="text-muted">Last updated 3 mins ago</small>
+            <Card.Text>
+              This is a wider card with supporting text
+            </Card.Text>
+          </Card.Body>
+        </Card><Card style={{height:'70%'}}>
+        <Card.Img variant="top" src={require('../../../Images/tour1.jpg')} style={{height:'200px'}} />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
           <small className="text-muted">Last updated 3 mins ago</small>
           <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in to
-            additional content.
+            This is a wider card with supporting text
           </Card.Text>
         </Card.Body>
-      </Card>
-      <Card style={{height:'60%'}}>
-          <Card.Img variant="top" src={require('../../../Images/tour3.jpg')}  />
-          <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <small className="text-muted">Last updated 3 mins ago</small>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content.
-            </Card.Text>
-          </Card.Body>
-        </Card>
+      </Card><Card style={{height:'70%'}}>
+      <Card.Img variant="top" src={require('../../../Images/people1.jpg')} style={{height:'200px'}} />
+      <Card.Body>
+        <small className="text-muted">Last updated 3 mins ago</small>
+        <Card.Text>
+          This is a wider card with supporting text
+        </Card.Text>
+      </Card.Body>
+    </Card>
         <Card style={{height:'60%'}}>
-          <Card.Img variant="top" src={require('../../../Images/tour3.jpg')}  />
+          <Card.Img variant="top" src={require('../../../Images/tour3.jpg')} style={{height:'200px'}} />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
             <small className="text-muted">Last updated 3 mins ago</small>
             <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content.
-            </Card.Text>
-          </Card.Body>
-        </Card>
-        <Card style={{height:'60%'}}>
-          <Card.Img variant="top" src={require('../../../Images/tour3.jpg')}  />
-          <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <small className="text-muted">Last updated 3 mins ago</small>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content.
+              This is a wider card with supporting text
             </Card.Text>
           </Card.Body>
         </Card>
       </CardDeck>
+      <br/>
+      <Button variant="outline-primary" style={{marginLeft:'660px'}}>More inspiration</Button>{' '}
+      </Container>
     )
 }
 

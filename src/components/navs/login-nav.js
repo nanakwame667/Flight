@@ -1,11 +1,17 @@
-import React from 'react';
+import React,{useState} from 'react';
+
 import {Nav} from 'react-bootstrap';
+
+import LoginForm from './../forms/LoginForm';
 
 
 function Login (props){
+  const [modalShow, setModalShow] = useState(false);
+
     return(
+      <div>
       <Nav>
-        <Nav.Link eventKey={2} href="/logIn">
+        <Nav.Link eventKey={2} onClick={() => setModalShow(true)}>
             <img
             src={require('../../Images/login-icon1.png')}
             width="25"
@@ -17,7 +23,11 @@ function Login (props){
               Sign In
             </Nav.Link>
         </Nav>
-        
+        <LoginForm 
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        />
+        </div>
     )
 }
 
