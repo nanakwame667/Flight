@@ -1,8 +1,10 @@
 import React from 'react';
+
 import Container from 'react-bootstrap/Container';
-import NavBar from './home/NavBar';
+
 import HomeCarousel from './home/Carouselhome';
 import HomeCards from './home/HomeCards';
+import NavBar from './home/NavBar';
 import HomeFooter from './home/footer';
 
 
