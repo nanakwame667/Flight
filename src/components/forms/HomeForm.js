@@ -21,6 +21,7 @@ function HomeForm (){
         </div>
         <br/>
         <HomeCards/>
+        <br/><br/>
         <footer>
         <HomeFooter/>
         </footer>

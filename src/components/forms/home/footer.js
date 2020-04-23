@@ -35,16 +35,42 @@ function HomeFooter(){
       </Card.Text>
       </Col>
     </Row>
+    <br/><br/><br/>
+    <Row style={{marginInline:'10px',marginTop:'15px'}}>
+    <Col md="9">
+    <Card.Link href="#" style={{color:'black'}} >Privacy</Card.Link>
+    <Card.Link href="#" style={{color:'black'}} >Terms & Conditions</Card.Link>
+    <Card.Link href="#" style={{color:'black'}} >AdChoice</Card.Link>
+    </Col>
+    </Row>
     <br/><br/>
     <Row>
-    <Col md="3">
-    <Card.Link href="#" style={{color:'black'}} >Privacy</Card.Link>
-    </Col>
-    <Col md="3">
-    <Card.Link href="#" style={{color:'black'}} >Terms & Conditions</Card.Link>
-    </Col>
-    <Col md="3">
-    <Card.Link href="#" style={{color:'black'}} >AdChoice</Card.Link>
+    <Col md="9">
+    <img src={require('../../../Images/facebook.png')}
+    alt="FaceBook"
+    width="50"
+    height="50"
+    style={{marginRight:'15px'}} 
+    />
+    <img src={require('../../../Images/twitter.webp')}
+    alt="twitter"
+    width="40"
+        height="40"
+        style={{marginRight:'15px'}} 
+    />
+    <img
+    src={require('../../../Images/instagram.png')}
+    alt="instagram"
+    width="50"
+        height="40"
+        style={{marginRight:'15px'}} 
+    />
+    <img
+    src={require('../../../Images/github.png')}
+    alt="github"
+    width="40"
+        height="40"
+    />
     </Col>
     </Row>
       </Card.Body>
