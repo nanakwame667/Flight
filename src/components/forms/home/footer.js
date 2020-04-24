@@ -6,7 +6,7 @@ import {Card} from 'react-bootstrap';
 
 function HomeFooter(){
     return(
-      <Card bg="primary" variant="light" style={{height:'30rem'}} fluid>
+      <Card bg="primary" variant="light" style={{height:'30rem',width:'100%'}} fluid>
       <Card.Body style={{textAlign:'center',marginLeft:'250px'}}>
       <br/><br/>
       <Row>

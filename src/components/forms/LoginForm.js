@@ -33,7 +33,7 @@ function LoginForm (props){
         <Modal.Body>
         <h3 style={{marginTop:'30px',fontSize:'30px', marginLeft:'12px'}}>Hey!! Good to see you again</h3>
         <p style={{fontSize:'15px',marginLeft:'12px'}}>Sign in for member-only deals and access to your Trip details.</p>
-        <Container style={{width:'500px',height:'500px'}} fluid>
+        <Container style={{width:'500px',height:'400px'}} fluid>
         <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'30px'}}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
@@ -88,7 +88,7 @@ function LoginForm (props){
         </Modal.Body>
         <Modal.Footer>
         <p>Don't have an account?</p>
-        <Button variant="outline-primary" size="md" style={{marginLeft:'155px'}} onClick={() => setModalShow(true)}>Create Account</Button>
+        <Button variant="outline-primary" size="md" style={{marginLeft:'155px'}} onClick={()=>setModalShow(true)}>Create Account</Button>
         </Modal.Footer>
         </Modal>
         <SignupForm

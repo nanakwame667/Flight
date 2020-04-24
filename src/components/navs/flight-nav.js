@@ -1,13 +1,16 @@
 import React from 'react';
+
 import {Nav} from 'react-bootstrap';
+
+
 
 
 function Flight(){
     return(
       <div>
-        <Nav className="mr-auto" variant="outline-tabs">
+        <Nav className="mr-auto-active" variant="outline-tabs" expand="lg">
         <Nav.Item>
-          <Nav.Link href="/Flight" style={{marginLeft:'30px'}}>
+          <Nav.Link href="/flights" style={{marginLeft:'30px'}} variant="link" >
           <img
           src={require('../../Images/flight-icon.png')}
           width="30"
@@ -19,7 +22,6 @@ function Flight(){
           Flights</Nav.Link>
           </Nav.Item>
           </Nav>
-        
           </div>
     )
 }

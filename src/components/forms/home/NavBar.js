@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Navbar from 'react-bootstrap/Navbar';
-import {Nav} from 'react-bootstrap';
+import {Nav,Container} from 'react-bootstrap';
 
 import CarRentals from '../../navs/car-rentals-nav';
 import Explore from '../../navs/explore-nav';
@@ -15,12 +15,12 @@ import Packages from '../../navs/packages-nav';
 function NavBar (){
     return(
         <div style={{flex:1}}>
-        <Navbar  fixed="top" collapseOnSelect  expand="lg" bg="primary" variant="dark" >
-        <Nav className="mr-auto" defaultActiveKey="/Flight">
+        <Container>
+        <Navbar collapseOnSelect fixed="top"   expand="lg" bg="primary" variant="dark">
         <Navbar.Brand href="/" style={{marginLeft:'150px'}}>Flight-Booky</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto"defaultActiveKey="/Flights">
+            <Nav className="mr-auto"> 
             <Flight/>
             <Hotels/>
             <CarRentals/>
@@ -32,9 +32,10 @@ function NavBar (){
             <Login/>
             </Nav>
           </Nav>
+         
         </Navbar.Collapse>
-        </Nav>
       </Navbar>  
+      </Container>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+
 import Carousel from 'react-bootstrap/Carousel';
 
 
@@ -14,9 +15,9 @@ function HomeCarousel (){
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={require('../../../Images/f47937e39fc5df890bcbe50972c6c9f3.jpg')}
+          src={require('../../../Images/carousel3.jpg')}
           width="100%"
-          height="500px"
+          height="700px"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -27,9 +28,9 @@ function HomeCarousel (){
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={require('../../../Images/flight1.jpg')}
+          src={require('../../../Images/carousel1.jpg')}
           width="100%"
-          height="500px"
+          height="700px"
           alt="Second slide"
         />
 
@@ -41,9 +42,9 @@ function HomeCarousel (){
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={require('../../../Images/flight2.jfif')}
+          src={require('../../../Images/carousel2.jpg')}
           width="100%"
-          height="500px"
+          height="700px"
           alt="Third slide"
         />
 

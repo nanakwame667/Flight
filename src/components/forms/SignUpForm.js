@@ -31,7 +31,7 @@ function SignupForm (props){
           <Modal.Body>
           <h3 style={{marginTop:'30px',fontSize:'30px', marginLeft:'12px'}}>Sign Up and Save</h3>
           <p style={{fontSize:'15px',marginLeft:'12px'}}>Create an account now for access to member-only deals.</p>
-          <Container style={{width:'500px',height:'500px'}} fluid>
+          <Container style={{width:'500px',height:'400px'}} fluid>
           <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'30px'}}>
     <Form.Group controlId="formBasicEmail">
       <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>

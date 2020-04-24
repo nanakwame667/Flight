@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 
 import HomeCarousel from './home/Carouselhome';
 import HomeCards from './home/HomeCards';
-import NavBar from './home/NavBar';
 import HomeFooter from './home/footer';
 
 
@@ -12,7 +11,6 @@ function HomeForm (){
     return(
         
         <Container fluid="1000px" >
-        <NavBar/>
         <HomeCarousel/>
         <br/>
         <div style={{textAlign:'center',marginTop:'50px'}}>
