@@ -13,6 +13,8 @@ import "./assets/vendor/daterangepicker/daterangepicker.css";
 import "./assets/css/util.css";
 import "./assets/css/main.css";
 
+import AppContext from '../config/app-context';
+
 const axiosRestClient = require('axios-rest-client').default;
 const api = axiosRestClient({baseUrl: "http://localhost:5000/admin/"});
 
@@ -24,7 +26,9 @@ const api = axiosRestClient({baseUrl: "http://localhost:5000/admin/"});
 
 class LoginScreen extends Component {
 
-    state = {}
+    static appContext = AppContext;
+
+    state = {};
 
     constructor(props){
         super(props);
@@ -41,8 +45,10 @@ class LoginScreen extends Component {
             username: username, 
             password: password
         }).then(({data})=>{
+            this.appContext.user = data.admin;
+            this.appContext.token = data.token;
             if (data.status === 'success'){
-                this.setState({response: data}); 
+                this.setState({isAuth: true}); 
             }
         });
     }
@@ -50,7 +56,7 @@ class LoginScreen extends Component {
     render(){
         
         return (
-            (this.state.hasOwnProperty('response')) ?
+            (this.state.hasOwnProperty('isAuth') && this.state.isAuth && this.context.user !== null) ?
                 <Redirect to={{ pathname: '/admin/dashboard', state: this.state.response }}/> 
             : 
             <div className="App">

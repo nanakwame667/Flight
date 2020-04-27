@@ -9,11 +9,13 @@ import AdminLoginPage from './screens/login';
 import AdminRegisterPage from './screens/signup';
 import AdminDashboardPage from './screens/dashboard';
 
+import { AppProvider } from './config/app-context';
+
 
 
 function App() {
   return (
-    <div>
+    <AppProvider>
       <Switch>
         <Route path="/" exact component={HomePage}/>
         <Route path="/SignUp" exact component={SignUpPage}/>
@@ -22,8 +24,8 @@ function App() {
         <Route path="/admin/dashboard" exact component={AdminDashboardPage}/>
         <Route path="/admin/login" exact component={AdminLoginPage}/> 
         <Redirect from="/admin" to='/admin/login'/> 
-    </Switch>
-    </div>
+      </Switch>
+    </AppProvider>
   );
 }
 
