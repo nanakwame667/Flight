@@ -1,47 +1,33 @@
 import React from 'react';
 
+import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
-import {Card,Nav,NavDropdown,Navbar,Form} from 'react-bootstrap';
+import {Card,Nav,NavDropdown,Navbar,Form,Row,Col,Button,Dropdown,DropdownButton} from 'react-bootstrap';
 
-import HomeCards from './home/HomeCards';
-import HomeFooter from './home/footer';
+import FlightSearch from './FlightSearch';
 
-function FlightsForm (){
+
+
+
+
+
+
+
+function FlightsForm (props){
 return(
     <Container fluid="1000px">
     <Card>
-    <Card.Img src={require('../../Images/background.jpg')} alt="backgroundImg"/>
+    <Card.Img src={require('../../Images/bg.jpg')} alt="backgroundImg"/>
     <Card.ImgOverlay>
     <Card.Body>
-    <Card.Text style={{fontSize:'50px',marginTop:'100px',marginLeft:'70px'}}> Find and Compare Cheap Flights</Card.Text>
     <br/>
-    <Nav style={{marginLeft:'70px'}}>
-    <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-    <NavDropdown.Divider />
-    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-  </NavDropdown>
-  <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-  <NavDropdown.Divider />
-  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-</NavDropdown>
-<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-<NavDropdown.Divider />
-<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-</NavDropdown>
+    <Card.Text style={{fontSize:'45px',marginTop:'100px',marginLeft:'70px',color:'#fff'}}> Find and compare cheap <br/>flights</Card.Text>
+    <br/>
+    <Nav bg="outline-primary" variant="light"  style={{marginLeft:'60px'}}>
+    <FlightSearch/>
+  
   </Nav>
-  <Navbar className="bg-light justify-content-between" expand="lg" bg="primary" variant="light">
-  <Navbar.Brand href="#">Navbar</Navbar.Brand>
-  <Form inline></Form>
-  </Navbar>
+  
     </Card.Body>
     </Card.ImgOverlay>
     </Card>
