@@ -219,10 +219,10 @@ class FlightSearch extends Component{
             </Nav>
             
             <div style={{display:'flex',marginTop:'5px'}}>
-            <Navbar className="justify-content-between" expand="lg" bg="primary" variant="dark"
+            <Navbar className="justify-content-between" expand="lg" bg="info" variant="dark"
     style={{
     width:'60rem',
-    height:'80px',
+    height:'75px',
     marginLeft:'12px',
     borderRadius:'5px'
     }}>
@@ -234,11 +234,11 @@ class FlightSearch extends Component{
     
         <InputGroup >
         <Form.Control
-        style={{width:'15rem',height:'67px',marginRight:'12px',borderRadius:'7px'}}
+        style={{width:'20rem',height:'67px',marginRight:'12px',borderRadius:'7px'}}
         type="text"
         placeholder="From?"
         />
-        <Button style={{width:'45px',height:'55px',marginLeft:'5px',marginTop:'7px'}}><img 
+        <Button style={{width:'45px',height:'55px',marginLeft:'15px',marginTop:'7px'}}><img 
         src={require('../../Images/direction1.png')} 
         alt="direction"
         width="15px"
@@ -246,7 +246,7 @@ class FlightSearch extends Component{
         
         /></Button>
         <Form.Control
-        style={{width:'15rem',height:'67px',marginRight:'30px',marginLeft:'20px',borderRadius:'7px'}}
+        style={{width:'20rem',height:'67px',marginRight:'40px',marginLeft:'20px',borderRadius:'7px'}}
         type="text"
         placeholder="To?"
         />
