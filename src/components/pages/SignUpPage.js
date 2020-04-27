@@ -1,10 +1,12 @@
 import React from 'react';
-
+import NavBar from '../forms/home/NavBar';
 
 function SignUpPage(){
    
         return(
-            <div></div>
+            <div> 
+                <NavBar/>
+            </div>
         )
     }
 
