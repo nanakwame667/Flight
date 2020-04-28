@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 
 import {Nav} from 'react-bootstrap';
 
-import LoginForm from './../forms/LoginForm';
+import UserForm from '../forms/UserForm';
 
 
 function Login (props){
@@ -23,7 +23,7 @@ function Login (props){
               Sign In
             </Nav.Link>
         </Nav>
-        <LoginForm 
+        <UserForm 
         show={modalShow}
         onHide={() => setModalShow(false)}
         />

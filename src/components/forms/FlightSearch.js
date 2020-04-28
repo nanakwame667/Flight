@@ -234,11 +234,11 @@ class FlightSearch extends Component{
     
         <InputGroup >
         <Form.Control
-        style={{width:'20rem',height:'67px',marginRight:'12px',borderRadius:'7px'}}
+        style={{width:'221px',height:'67px',marginRight:'5px',borderRadius:'7px'}}
         type="text"
         placeholder="From?"
         />
-        <Button style={{width:'45px',height:'55px',marginLeft:'15px',marginTop:'7px'}}><img 
+        <Button style={{width:'45px',height:'55px',marginLeft:'5px',marginTop:'7px'}}><img 
         src={require('../../Images/direction1.png')} 
         alt="direction"
         width="15px"
@@ -246,11 +246,12 @@ class FlightSearch extends Component{
         
         /></Button>
         <Form.Control
-        style={{width:'20rem',height:'67px',marginRight:'40px',marginLeft:'20px',borderRadius:'7px'}}
+        style={{width:'221px',height:'67px',marginRight:'10px',marginLeft:'20px',borderRadius:'7px'}}
         type="text"
         placeholder="To?"
         />
         <RangeDatePicker
+        style={{width:'15rem'}}
         startDate={new Date(2020, 0, 15)}
         endDate={new Date(2020, 1, 1)}/>
         </InputGroup>
