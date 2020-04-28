@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
-class ProductsListItem extends Component {
-
-    constructor(props){
-        super(props);
-    }
+class ReservationsListItem extends Component {
 
     render(){
         return ( 
@@ -17,7 +13,7 @@ class ProductsListItem extends Component {
                 <span className="badge badge-success">Active</span>
                 </td>
                  <td>
-                    <button className="btn btn-pill btn-block btn-dark" type="button">Edit</button>
+                    <button className="btn btn-pill btn-block btn-dark" type="button">Pay</button>
                  </td>
                  <td>
                     <button className="btn btn-pill btn-block btn-danger" type="button">Delete</button>
@@ -28,4 +24,4 @@ class ProductsListItem extends Component {
 
 }
 
-export default ProductsListItem;
+export default ReservationsListItem;

@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
-class CustomersListItem extends Component {
-
-    constructor(props){
-        super(props);
-    }
+class FlightsListItem extends Component {
 
     render(){
         return ( 
             <div className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex w-100 justify-content-between">
-                    <h5 className="mb-1">Customer ID</h5>
+                    <h5 className="mb-1">Flight ID</h5>
                     <small>3 days ago</small>
                 </div>
                 <div className="row">
@@ -126,7 +122,7 @@ class CustomersListItem extends Component {
                                     <div className="form-group">
                                     <div className="input-group">
                                         <div className="input-group-prepend">
-                                        <span className="input-group-text">Reservations Count</span>
+                                        <span className="input-group-text">Flights Count</span>
                                         </div>
                                         <input className="form-control"  type="text" disabled="" />
                                         <div className="input-group-append">
@@ -183,4 +179,4 @@ class CustomersListItem extends Component {
 
 }
 
-export default CustomersListItem;
+export default FlightsListItem;

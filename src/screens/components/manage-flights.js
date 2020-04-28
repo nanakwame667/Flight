@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import AdminAddCustomer from './admin-add-customer';
-import AdminViewCustomers from './admin-view-customers';
+import AdminAddFlight from './admin-add-flight';
+import AdminViewFlights from './admin-view-flights';
 
-class ManageCustomer extends Component {
+class ManageFlight extends Component {
 
     state = {
-        showViewFor: 'customers'
-    }
-
-    constructor(props){
-        super(props);
+        showViewFor: 'flights'
     }
 
     render(){
@@ -18,8 +14,8 @@ class ManageCustomer extends Component {
             <div>
 
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item" onClick={() => this.setState({showViewFor: 'customers'})}><a href="#">Customers</a></li>
-                    <li className="breadcrumb-item active"  onClick={() => this.setState({showViewFor: 'add-customer'})}>
+                    <li className="breadcrumb-item" onClick={() => this.setState({showViewFor: 'flights'})}><a href="#">Flights</a></li>
+                    <li className="breadcrumb-item active"  onClick={() => this.setState({showViewFor: 'add-flight'})}>
                         <a href="#">New</a>
                     </li>
                     <li className="breadcrumb-menu d-md-down-none">
@@ -31,7 +27,7 @@ class ManageCustomer extends Component {
                                         <button className="btn btn-primary" type="button">
                                             <i className="fa fa-search"></i> Search</button>
                                         </span>
-                                        <input className="form-control" id="input1-group2" type="text" name="input1-group2" placeholder="name"/>
+                                        <input className="form-control" id="input1-group2" type="text" name="input1-group2" placeholder="flight id"/>
                                     </div>
                                 </div>
                             </div>
@@ -46,8 +42,8 @@ class ManageCustomer extends Component {
 
                         <div className="row">
                             <div className="col-12">
-                                {this.state.showViewFor === 'add-customer' && <AdminAddCustomer/>}
-                                {this.state.showViewFor === 'customers' && <AdminViewCustomers/>}
+                                {this.state.showViewFor === 'add-flight' && <AdminAddFlight/>}
+                                {this.state.showViewFor === 'flights' && <AdminViewFlights/>}
                             </div>
 
                         </div>
@@ -62,4 +58,4 @@ class ManageCustomer extends Component {
 
 }
 
-export default ManageCustomer;
+export default ManageFlight;

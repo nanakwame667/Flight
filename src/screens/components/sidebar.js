@@ -2,21 +2,16 @@ import React, { Component } from 'react';
 
 class Sidebar extends Component {
 
-    constructor(props){
-        super(props);
-    }
+    render(){
 
-   
-render(){
-
-    return (
+        return (
           <div className="sidebar">
                 <nav className="sidebar-nav">
                     <ul className="nav">
                     {/* <li className="nav-title">Reservations</li> */}
                         <li className="nav-item">
-                            <span className="nav-link" onClick={()=> this.props.onCustomersClick()}>
-                                <i className="nav-icon icon-speedometer"></i> Customers
+                            <span className="nav-link" onClick={()=> this.props.onFlightsClick()}>
+                                <i className="nav-icon icon-speedometer"></i> Flights
                             </span>
                         </li>
                         <li className="nav-item">

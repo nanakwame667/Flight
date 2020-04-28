@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
+import AppContext from '../../config/app-context';
 class AdminHome extends Component {
-
-    constructor(props){
-        super(props);
-    }
     
+    static contextType = AppContext;
+
     render(){
         return (
            
@@ -16,14 +15,14 @@ class AdminHome extends Component {
                 <div className="row">
                     <div className="col-12">
                         <div className="jumbotron">
-                            <h1 className="display-3">Hello, Admin!</h1>
-                            <p className="lead">You can add, edit or remove product item using this tool.. It also show you the current important statistics</p>
+                            <h1 className="display-3">Hello, {this.context.admin.firstname}!</h1>
+                            <p className="lead">You can add, edit or remove flights/reservations item using this tool.. It also show you the current important statistics</p>
                             <hr className="my-4"/>
-                            <p>See all your products that are available or add new product</p>
+                            <p>manage all your reservations and flights made</p>
                             <p className="lead">
-                                <span className="btn btn-primary btn-lg" role="button" onClick={()=>{this.props.showSeeProducts()}}>See Customers</span>
-                                <span className="btn btn-success btn-lg" role="button" onClick={()=>{this.props.showAddProduct()}}>Add Reservation</span>
-                                <span className="btn btn-success btn-lg" role="button" onClick={()=>{this.props.showAddProduct()}}>Add Flightyuhnjn                              </span>
+                                <span className="btn btn-primary btn-lg mr-1" role="button" onClick={()=>{this.props.showAddReservation()}}>Manage Reservations</span>
+                                <span className="btn btn-success btn-lg mr-1" role="button" onClick={()=>{this.props.showAddReservation()}}>Manage Flights</span>
+                                <span className="btn btn-secondary btn-lg mr-1" role="button" onClick={()=>{this.props.showSeeReservations()}}>Manage Customers</span>
                             </p>
                         </div>
                     </div>
@@ -31,18 +30,14 @@ class AdminHome extends Component {
                 <div className="row">
                     <div className="col-12">
                         <div className="list-group">
-                            <a className="list-group-item active" href="#">Products that are out of stock</a>
-                            <a className="list-group-item list-group-item-action" href="#">Olive OX-3</a>
-                            <a className="list-group-item list-group-item-action" href="#">FanMilk - Large</a>
-                            <a className="list-group-item list-group-item-action" href="#">Theory Of Philis Book</a>
-                            <a className="list-group-item list-group-item-action" href="#">Microsof Windows 10</a>
+                            <a className="list-group-item active" href="#">Flight default</a>
+                            <a className="list-group-item list-group-item-action" href="#">Pheonix OX-3</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="card-footer">
-                <button className="btn btn-sm btn-danger" type="reset">
-                <i className="fa fa-ban"></i> LOGOUT</button>
+                
             </div>
         </div>
 

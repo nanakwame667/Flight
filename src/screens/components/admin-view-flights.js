@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import CustomersListItem from './customers-list-item';
+import ReservationsListItem from './flights-list-item';
 
-class AdminViewCustomers extends Component {
+class AdminViewReservations extends Component {
 
     constructor(props){
         super(props);
     }
 
-    getAllCustomerItems(){
+    getAllReservationItems(){
         return [
             {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 1', email: 'example1@gmail.com', phone: '0240000000'},
             {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 2', email: 'example2@gmail.com', phone: '0240000000'},
@@ -26,14 +26,14 @@ class AdminViewCustomers extends Component {
         return (
                <div className="card">
                   <div className="card-header">
-                    <i className="fa fa-align-justify"></i> Customers Items
-                    <small> (list of all registered customers)</small>
+                    <i className="fa fa-align-justify"></i> Reservations Items
+                    <small> (list of all registered reservations)</small>
                   </div>
                   <div className="card-body">
                     <div className="list-group">
                         {
-                            this.getAllCustomerItems().map((item, i) => {
-                                return <CustomersListItem item={item} key={1}/>
+                            this.getAllReservationItems().map((item, i) => {
+                                return <ReservationsListItem item={item} key={1}/>
                             })
                         }
                     </div>
@@ -45,4 +45,4 @@ class AdminViewCustomers extends Component {
 
 }
 
-export default AdminViewCustomers;
+export default AdminViewReservations;

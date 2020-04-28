@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
-class AdminSeeProduct extends Component {
-
-    constructor(props){
-        super(props);
-    }
+class AdminSeeReservation extends Component {
 
     render(){
         return (
             <div className="card">
             <div className="card-header">
-              Product Item
+              Reservation Item
             </div>
             <div className="card-body">
               <div id="accordion" role="tablist">
@@ -57,4 +53,4 @@ class AdminSeeProduct extends Component {
 
 }
 
-export default AdminSeeProduct;
+export default AdminSeeReservation;

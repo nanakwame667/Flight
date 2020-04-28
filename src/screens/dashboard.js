@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import Header from './components/header';
 import Footer from './components/footer';
 import Sidebar from './components/sidebar';
-import ManageCustomers from './components/manage-customers';
-import ManageOrders from './components/manage-orders';
+import ManageFlights from './components/manage-flights';
+import ManageOrders from './components/manage-reservations';
 import AdminTools from './components/manage-admin-tools';
 
 import { Redirect} from 'react-router-dom';
@@ -28,17 +28,17 @@ class DashBoardScreen extends Component {
     static contextType = AppContext;
 
     state={
-        activeManagerFor: 'reservation'
+        activeManagerFor: 'admin-tool'
     }
 
     render(){
         console.log(this.context)
         return (
-            (this.context.token == null) ?  <Redirect to='/admin/login'/> :
+            (this.context.token === null) ?  <Redirect to='/admin/login'/> :
             <div className="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 
                 <Header 
-                    onCustomersClick={()=> this.setState({activeManagerFor: 'customer'})}
+                    onFlightsClick={()=> this.setState({activeManagerFor: 'flight'})}
                     onReservationsClick={()=> this.setState({activeManagerFor: 'reservation'})}
                     onAdminToolsClick={()=> this.setState({activeManagerFor: 'admin-tool'})}  
                     />
@@ -46,14 +46,14 @@ class DashBoardScreen extends Component {
                 <div className="app-body">
 
                     <Sidebar
-                        onCustomersClick={()=> this.setState({activeManagerFor: 'customer'})}
+                        onFlightsClick={()=> this.setState({activeManagerFor: 'flight'})}
                         onReservationsClick={()=> this.setState({activeManagerFor: 'reservation'})}
                         onAdminToolsClick={()=> this.setState({activeManagerFor: 'admin-tool'})}
                         onLogoutClick={() => this.context.updateState({token: null, admin: null})}  
                     />
                     
                     <main className="main">
-                        {this.state.activeManagerFor === 'customer' && <ManageCustomers/>}
+                        {this.state.activeManagerFor === 'flight' && <ManageFlights/>}
                         {this.state.activeManagerFor === 'reservation' && <ManageOrders/>}
                         {this.state.activeManagerFor === 'admin-tool' && <AdminTools/>}
                     </main>

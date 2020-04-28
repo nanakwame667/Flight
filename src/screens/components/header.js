@@ -4,11 +4,7 @@ import '../assets/core-ui/css/style.css';
 
 
 class Header extends Component {
-
-    constructor(props){
-        super(props);
-    }
-
+    
     render(){
         return (
             <header className="app-header navbar">
@@ -23,8 +19,8 @@ class Header extends Component {
                 </button>
                 <ul className="nav navbar-nav d-md-down-none">
                     <li className="nav-item px-3">
-                        <span className="nav-link" onClick={ event => this.props.onCustomersClick()}>
-                            Customers
+                        <span className="nav-link" onClick={ event => this.props.onFlightsClick()}>
+                            Flights
                         </span>
                     </li>
                     <li className="nav-item px-3">

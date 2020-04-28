@@ -5,10 +5,6 @@ import '../assets/core-ui/css/Footer-Dark.css';
 
 class Footer extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <footer className="app-footer">

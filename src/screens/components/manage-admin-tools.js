@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import AdminHome from './admin-home';
-import AdminViewProducts from './admin-view-products';
-import AdminAddProduct from './admin-add-product';
-import AdminProductItem from './admin-product-item';
+import AdminViewReservations from './admin-view-reservations';
+import AdminAddReservation from './admin-add-reservation';
+import AdminReservationItem from './admin-reservation-item';
 
 
 class AdminTools extends Component {
 
     state = {
         actiavateViewFor: 'home'
-    }
-
-    constructor(props){
-        super(props);
     }
 
     render(){
@@ -26,10 +22,6 @@ class AdminTools extends Component {
                         onClick={() => this.setState({actiavateViewFor: 'home'})}>
                         <button>Tools</button>
                     </li>
-                     <li className="breadcrumb-item"
-                        onClick={() => this.setState({actiavateViewFor: 'see-products'})}>
-                        <button>Products</button>
-                    </li>
                      <li className="breadcrumb-menu d-md-down-none">
                         <div>
                             <div className="form-group row">
@@ -39,7 +31,7 @@ class AdminTools extends Component {
                                         <button className="btn btn-primary" type="button">
                                             <i className="fa fa-search"></i> Search</button>
                                         </span>
-                                        <input className="form-control" type="text" placeholder="product id or name"/>
+                                        <input className="form-control" type="text" placeholder="reservation id or name"/>
                                     </div>
                                 </div>
                             </div>
@@ -55,10 +47,10 @@ class AdminTools extends Component {
                         <div className="row">
                             <div className="col-12">
                                 {this.state.actiavateViewFor === 'home' && <AdminHome 
-                                    showSeeProducts={() => this.setState({actiavateViewFor: 'see-products'})}
-                                    showAddProduct={() => this.setState({actiavateViewFor: 'add-product'})}/>}
-                                {this.state.actiavateViewFor === 'add-product' && <AdminAddProduct/>}
-                                {this.state.actiavateViewFor === 'see-products' && <AdminViewProducts/>}
+                                    showSeeReservations={() => this.setState({actiavateViewFor: 'see-reservations'})}
+                                    showAddReservation={() => this.setState({actiavateViewFor: 'add-reservation'})}/>}
+                                {this.state.actiavateViewFor === 'add-reservation' && <AdminAddReservation/>}
+                                {this.state.actiavateViewFor === 'see-reservations' && <AdminViewReservations/>}
                             </div>
                         </div>
 

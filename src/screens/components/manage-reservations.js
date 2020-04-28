@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import ReservationItem from './order-item';
+import ReservationItem from './reservation-item';
+import AdminViewReservations from './admin-view-reservations';
 
 class ManageReservations extends Component {
 
     state= {
-        customer: '',
-        searchCustomerBy: ''
+        reservation: '',
+        searchReservationBy: '',
+        showViewFor: 'add-reservation'
     }
 
     constructor(props){
         super(props);
-        this.onSearchCustomerTextChange = this.onSearchCustomerTextChange.bind(this);
-        this.setCustomerValue = this.setCustomerValue.bind(this);
+        this.onSearchReservationTextChange = this.onSearchReservationTextChange.bind(this);
+        this.setReservationValue = this.setReservationValue.bind(this);
     }
 
     addNewReservationField(){
@@ -22,26 +24,26 @@ class ManageReservations extends Component {
         }
     }
 
-    onSearchCustomerTextChange(event){
-            this.searchResult = this.searchForCustomerByNameOrID(event.target.value);
-            this.setState({searchCustomerBy: event.target.value, customer: ''});
+    onSearchReservationTextChange(event){
+            this.searchResult = this.searchForReservationByNameOrID(event.target.value);
+            this.setState({searchReservationBy: event.target.value, reservation: ''});
     }
 
-    setCustomerValue(data){
+    setReservationValue(data){
             this.setState({
-                searchCustomerBy: '',
-                customer: data
+                searchReservationBy: '',
+                reservation: data
             });
     }
 
-    searchForCustomerByNameOrID(searhValue){
+    searchForReservationByNameOrID(searhValue){
         return [
-            'Customer 1',
-            'Customer 2',
-            'Customer 3',
-            'Customer 4',
-            'Customer 5',
-            'Customer 6'
+            'Reservation 1',
+            'Reservation 2',
+            'Reservation 3',
+            'Reservation 4',
+            'Reservation 5',
+            'Reservation 6'
         ];
     }
 
@@ -51,8 +53,8 @@ class ManageReservations extends Component {
             <div>
 
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Reservations</a></li>
-                    <li className="breadcrumb-item active">
+                    <li className="breadcrumb-item"  onClick={() => this.setState({showViewFor: 'reservations'})}><a href="#">Reservations</a></li>
+                    <li className="breadcrumb-item active"  onClick={() => this.setState({showViewFor: 'add-reservation'})}>
                         <a href="#">New</a>
                     </li>
                     <li className="breadcrumb-menu d-md-down-none">
@@ -64,7 +66,7 @@ class ManageReservations extends Component {
                                         <button className="btn btn-primary" type="button">
                                             <i className="fa fa-search"></i> Search</button>
                                         </span>
-                                        <input className="form-control" id="input1-group2" type="text" name="input1-group2" placeholder="customer-id"/>
+                                        <input className="form-control" id="input1-group2" type="text" name="input1-group2" placeholder="reservation-id"/>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +81,7 @@ class ManageReservations extends Component {
 
                         <div className="row">
                             <div className="col-12">
-                            
+                                { (this.state.showViewFor === 'reservations') ? <AdminViewReservations/> :
                                 <div className="card">
                                     <div className="card-header">
                                         <strong>Add New Reservation</strong> Form</div>
@@ -90,14 +92,14 @@ class ManageReservations extends Component {
                                                     <div className="col-md-12">
                                                         <div className="input-group">
                                                             <div className="input-group-prepend">
-                                                                <button className="btn btn-primary" type="button">Customer</button>
+                                                                <button className="btn btn-primary" type="button">Reservation</button>
                                                                 <span className="btn btn-primary" type="button" data-toggle="dropdown">
                                                                 </span>
                                                                 </div>
                                                                 <input className="form-control" type="text" 
-                                                                        onChange={ event => this.onSearchCustomerTextChange(event)}
-                                                                        value={(this.state.searchCustomerBy === '') ? this.state.customer: this.state.searchCustomerBy}
-                                                                        placeholder="search customer by name or id"/>
+                                                                        onChange={ event => this.onSearchReservationTextChange(event)}
+                                                                        value={(this.state.searchReservationBy === '') ? this.state.reservation: this.state.searchReservationBy}
+                                                                        placeholder="search reservation by name or id"/>
                                                                 <div className="input-group-append">
                                                                 <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                                                                     <span className="carets"></span>
@@ -106,14 +108,14 @@ class ManageReservations extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className={"select-options p-3"+((this.state.searchCustomerBy === '') ? 'invisible':'')}>
+                                                <div className={"select-options p-3"+((this.state.searchReservationBy === '') ? 'invisible':'')}>
                                                     <ul className="option-items">
-                                                        {this.state.searchCustomerBy !== '' && <li><option className="option-item" value="">Matched Results</option></li>}
-                                                        {this.state.searchCustomerBy !== '' && <div className="dropdown-divider" role="separator"></div> }
+                                                        {this.state.searchReservationBy !== '' && <li><option className="option-item" value="">Matched Results</option></li>}
+                                                        {this.state.searchReservationBy !== '' && <div className="dropdown-divider" role="separator"></div> }
                                                         {
-                                                           this.state.searchCustomerBy !== '' && this.searchResult.map(data => {
+                                                           this.state.searchReservationBy !== '' && this.searchResult.map(data => {
                                                                 return  <li><option className="dropdown-item option-item" 
-                                                                                    onClick={()=> this.setCustomerValue(data)}>{data}
+                                                                                    onClick={()=> this.setReservationValue(data)}>{data}
                                                                             </option>
                                                                         </li>
                                                                             
@@ -135,7 +137,7 @@ class ManageReservations extends Component {
                                                 </div>
                                             }
                                                 
-                                            { this.state.customer !== '' && <div className="row">
+                                            { this.state.reservation !== '' && <div className="row">
                                                 <div className="col-md-12 pt-3">
                                                     <button className="btn btn-primary" type="button" onClick={() => this.addNewReservationField()}>
                                                         <i className="fa fa-add"></i> Add Reservation
@@ -150,6 +152,7 @@ class ManageReservations extends Component {
                                         <i className="fa fa-check"></i> Submit Reservation</button>}
                                     </div>
                                 </div>
+                                }
                             </div>
                         </div>
                     </div>

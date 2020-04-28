@@ -6,21 +6,20 @@ import Toast from 'react-bootstrap/Toast';
 import { RangeDatePicker,SingleDatePicker } from 'react-google-flight-datepicker';
 
 class FlightSearch extends Component{
+    
     constructor(props) {
         super(props);
-        
-        
          
         const range=()=>{
             return(
                 <RangeDatePicker
-        startDate={new Date(2020, 0, 15)}
-        endDate={new Date(2020, 1, 1)}/>
+                    startDate={Date.now()}
+                    endDate={new Date(2020, 1, 1)}/>
             )
         }
         const single=()=>{
             return(
-                <SingleDatePicker startDate={new Date(2020, 0, 15)} />
+                <SingleDatePicker startDate={Date.now()} />
             )
         }
 

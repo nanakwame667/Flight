@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 
 class ReservationItem extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <div className="row">
@@ -34,7 +30,7 @@ class ReservationItem extends Component {
                                 Name
                               </span>
                             </div>
-                            <input className="form-control" type="text" placeholder="Product"/>
+                            <input className="form-control" type="text" placeholder="Reservation"/>
                           </div>
                         </div>
                       </div>

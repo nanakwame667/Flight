@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import ProductsListItem from './products-list-item';
-import ProductItem from './admin-product-item';
+import ReservationsListItem from './reservations-list-item';
+import ReservationItem from './admin-reservation-item';
 
-class AdminViewProducts extends Component {
+class AdminViewReservations extends Component {
 
     state = {
         item: undefined
     }
 
-    constructor(props){
-        super(props);
-    }
-
-    getAllProductItems(){
+    getAllReservationItems(){
         return [
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10},
-            {name: 'Product 1', price: 600, stock: 10}
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10},
+            {name: 'Reservation 1', price: 600, stock: 10}
         ]
     }
 
@@ -32,7 +28,7 @@ class AdminViewProducts extends Component {
         return (
                 <div className="card">
                   <div className="card-header">
-                    <i className="fa fa-align-justify"></i> Products Items
+                    <i className="fa fa-align-justify"></i> Reservations Items
                     <small> (list of all available items)</small>
                   </div>
                   <div className="card-body">
@@ -50,8 +46,8 @@ class AdminViewProducts extends Component {
                       </thead>
                       <tbody>
                          {
-                            this.getAllProductItems().map((item, i) => {
-                                return <ProductsListItem item={item} key={1} 
+                            this.getAllReservationItems().map((item, i) => {
+                                return <ReservationsListItem item={item} key={1} 
                                         showItem={() => this.setState({item: item})} />
                             })
                         }
@@ -60,11 +56,11 @@ class AdminViewProducts extends Component {
                     }
 
                     {
-                        (typeof this.state.item !== "undefined") &&  <ProductItem item={this.state.item} 
+                        (typeof this.state.item !== "undefined") &&  <ReservationItem item={this.state.item} 
                                         showList={() => this.setState({item: undefined})}/>
                     }
 
-                    <button className="btn btn-pill btn-block btn-primary col-4 float-right" type="button">Add Product</button>
+                    <button className="btn btn-pill btn-block btn-primary col-4 float-right" type="button">Add Reservation</button>
 
                   </div>
                 </div>
@@ -74,4 +70,4 @@ class AdminViewProducts extends Component {
 
 }
 
-export default AdminViewProducts;
+export default AdminViewReservations;
