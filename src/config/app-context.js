@@ -1,11 +1,33 @@
 import React from 'react';
 
-const AppContext = React.createContext({
-    user: null,
-    token: null
-});
+const AppContext = React.createContext();
 
-export const AppProvider = AppContext.Provider;
+export class AppProvider extends React.Component{
+
+    updateState = state => {
+        localStorage.setItem("token", state.token === null ? undefined: state.token);
+        localStorage.setItem("user", state.user === null ? undefined: JSON.stringify(state.user));
+        localStorage.setItem("admin", state.admin === null ? undefined: JSON.stringify(state.admin));
+        this.setState(state);
+       
+     }
+    
+    state = {
+        token: localStorage.getItem("token") === 'undefined' ? null : localStorage.getItem("token"),
+        user: localStorage.getItem("user") === 'undefined' ? null : JSON.parse(localStorage.getItem("user")),
+        admin: localStorage.getItem("admin") === 'undefined' ? null : JSON.parse(localStorage.getItem("admin")),
+        updateState: this.updateState
+    };
+
+    render(){
+        return (
+            <AppContext.Provider value={this.state}>
+                {this.props.children}
+            </AppContext.Provider>
+        );
+    }
+
+};
 
 export const AppConsumer = AppContext.Consumer;
 

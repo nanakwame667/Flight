@@ -13,7 +13,7 @@ class Footer extends Component {
         return (
             <footer className="app-footer">
                 <div>
-                    <a href="#">Ajtechub</a>
+                    <a href="#">TeamGladys</a>
                     <span>© 2020 developersLabs.</span>
                 </div>
                 <div className="ml-auto">

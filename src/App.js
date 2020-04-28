@@ -1,31 +1,47 @@
 import React from 'react';
 
-import {Route, Switch, Redirect} from 'react-router-dom';
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
 import FlightsPage from './components/pages/FlightsPage';
 import HomePage from './components/pages/HomePage';
 import SignUpPage from './components/pages/SignUpPage';
+import ErrorPage from './components/pages/404ErrorPage';
 import AdminLoginPage from './screens/login';
 import AdminRegisterPage from './screens/signup';
 import AdminDashboardPage from './screens/dashboard';
 
 import { AppProvider } from './config/app-context';
 
-
-
 function App() {
   return (
     <AppProvider>
-      <Switch>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/SignUp" exact component={SignUpPage}/>
-        <Route path="/flights" exact component={FlightsPage}/>
-        <Route path="/admin/signup" exact component={AdminRegisterPage}/> 
-        <Route path="/admin/dashboard" exact component={AdminDashboardPage}/>
-        <Route path="/admin/login" exact component={AdminLoginPage}/> 
-        <Redirect from="/admin" to='/admin/login'/> 
-      </Switch>
-    </AppProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact>
+              <HomePage/>
+          </Route>
+          <Route path="/signup" exact>
+              <SignUpPage/>
+          </Route>
+          <Route path="/flight" exact>
+              <FlightsPage/>
+          </Route>
+          <Route path="/admin/login" exact>
+              <AdminLoginPage/>
+          </Route>
+          <Route path="/admin/signup" exact>
+              <AdminRegisterPage/>
+          </Route>
+          <Route path="/admin/dashboard" exact>
+              <AdminDashboardPage/>
+          </Route>
+          <Redirect from="/admin" to='/admin/login'/> 
+          <Route>
+            <ErrorPage/>
+          </Route> 
+        </Switch>
+      </BrowserRouter>
+      </AppProvider>
   );
 }
 

@@ -13,7 +13,8 @@ import "./assets/vendor/daterangepicker/daterangepicker.css";
 import "./assets/css/util.css";
 import "./assets/css/main.css";
 
-import AppContext from '../config/app-context';
+
+import { AppConsumer } from '../config/app-context';
 
 const axiosRestClient = require('axios-rest-client').default;
 const api = axiosRestClient({baseUrl: "http://localhost:5000/admin/"});
@@ -26,8 +27,6 @@ const api = axiosRestClient({baseUrl: "http://localhost:5000/admin/"});
 
 class LoginScreen extends Component {
 
-    static appContext = AppContext;
-
     state = {};
 
     constructor(props){
@@ -35,7 +34,7 @@ class LoginScreen extends Component {
         this.attemptLogin = this.attemptLogin.bind(this);
     }
 
-    attemptLogin(event) {
+    attemptLogin(event, updateContext) {
         event.preventDefault();
         console.log("attempting signin");
         let username = this.username.value;
@@ -45,64 +44,69 @@ class LoginScreen extends Component {
             username: username, 
             password: password
         }).then(({data})=>{
-            this.appContext.user = data.admin;
-            this.appContext.token = data.token;
             if (data.status === 'success'){
-                this.setState({isAuth: true}); 
+                updateContext(data.result.data);
+                this.setState({isAuth: true, loginFailed: false, data: data.result.data}); 
+            }
+            else{
+                this.setState({loginFailed: true, message: data.result.message}); 
             }
         });
     }
 
     render(){
-        
         return (
-            (this.state.hasOwnProperty('isAuth') && this.state.isAuth && this.context.user !== null) ?
-                <Redirect to={{ pathname: '/admin/dashboard', state: this.state.response }}/> 
-            : 
-            <div className="App">
-                <div className="limiter">
-                    <div className="container-login100">
-                        <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                        
-                            <form className="login100-form validate-form">
-                                <span className="login100-form-title p-b-33">
-                                    Account Login
-                                </span>
-
-                                <div className="wrap-input100 validate-input" data-validate = "Valid username is required: ex@abc.xyz">
-                                    <input className="input100" type="text" name="email" placeholder="Email" ref={view => this.username = view}/>
-                                    <span className="focus-input100-1"></span>
-                                    <span className="focus-input100-2"></span>
-                                </div>
-
-                                <div className="wrap-input100 rs1 validate-input" data-validate="Password is required">
-                                    <input className="input100" type="password" name="pass" placeholder="Password" ref={view => this.password = view}/>
-                                    <span className="focus-input100-1"></span>
-                                    <span className="focus-input100-2"></span>
-                                </div>
-
-                                <div className="container-login100-form-btn m-t-20">
-                                    <button className="login100-form-btn" onClick={(event)=>this.attemptLogin(event)}>
-                                        Sign in
-                                    </button>
-                                </div>
-
-                                <div className="text-center p-t-45 p-b-4">
-                                
-                                </div>
-
-                                <div className="text-center">
-                                    <span className="txt1">
-                                        Create an account? 
+            <AppConsumer>
+                {({token, updateState}) => (this.state.isAuth || token)  ? 
+                <Redirect to='/admin/dashboard'/> :
+                <div className="App">
+                    <div className="limiter">
+                        <div className="container-login100">
+                            <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                            
+                                <form className="login100-form validate-form">
+                                    <span className="login100-form-title p-b-33">
+                                        Account Login
                                     </span>
-                                    <NavLink to='/admin/signup' className="txt2 hov1"> Sign up </NavLink>
-                                </div>
 
-                            </form>
+                                    {this.state.loginFailed && <p className="lead text-center text-danger">{this.state.message}</p> }
+
+                                    <div className="wrap-input100 validate-input" data-validate = "Valid username is required: ex@abc.xyz">
+                                        <input className="input100" type="text" name="email" placeholder="Email" ref={view => this.username = view}/>
+                                        <span className="focus-input100-1"></span>
+                                        <span className="focus-input100-2"></span>
+                                    </div>
+
+                                    <div className="wrap-input100 rs1 validate-input" data-validate="Password is required">
+                                        <input className="input100" type="password" name="pass" placeholder="Password" ref={view => this.password = view}/>
+                                        <span className="focus-input100-1"></span>
+                                        <span className="focus-input100-2"></span>
+                                    </div>
+
+                                    <div className="container-login100-form-btn m-t-20">
+                                        <button className="login100-form-btn" onClick={(event)=> {this.attemptLogin(event, updateState)}}>
+                                            Sign in
+                                        </button>
+                                    </div>
+
+                                    <div className="text-center p-t-45 p-b-4">
+                                    
+                                    </div>
+
+                                    <div className="text-center">
+                                        <span className="txt1">
+                                            Create an account? 
+                                        </span>
+                                        <NavLink to='/admin/signup' className="txt2 hov1"> Sign up </NavLink>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>   
+                </div>  
+                }
+            </AppConsumer>     
        );
     
     }
