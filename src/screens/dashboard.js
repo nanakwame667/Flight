@@ -31,26 +31,24 @@ class DashBoardScreen extends Component {
         activeManagerFor: 'admin-tool'
     }
 
+    constructor(props, context){
+        super(props, context);
+        this.context.updateState({
+             activateManager: (route)=> this.setState({activeManagerFor: route })
+        });
+    }
+
     render(){
-        console.log(this.context)
+       
         return (
             (this.context.token === null) ?  <Redirect to='/admin/login'/> :
             <div className="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 
-                <Header 
-                    onFlightsClick={()=> this.setState({activeManagerFor: 'flight'})}
-                    onReservationsClick={()=> this.setState({activeManagerFor: 'reservation'})}
-                    onAdminToolsClick={()=> this.setState({activeManagerFor: 'admin-tool'})}  
-                    />
+                <Header/>
 
                 <div className="app-body">
 
-                    <Sidebar
-                        onFlightsClick={()=> this.setState({activeManagerFor: 'flight'})}
-                        onReservationsClick={()=> this.setState({activeManagerFor: 'reservation'})}
-                        onAdminToolsClick={()=> this.setState({activeManagerFor: 'admin-tool'})}
-                        onLogoutClick={() => this.context.updateState({token: null, admin: null})}  
-                    />
+                    <Sidebar/>
                     
                     <main className="main">
                         {this.state.activeManagerFor === 'flight' && <ManageFlights/>}

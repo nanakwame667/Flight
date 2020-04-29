@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
 import '../assets/core-ui/css/style.css';
-
+import AppContext from '../../config/app-context';
 
 class Header extends Component {
     
+    static contextType = AppContext;
+
     render(){
         return (
             <header className="app-header navbar">
@@ -19,17 +21,17 @@ class Header extends Component {
                 </button>
                 <ul className="nav navbar-nav d-md-down-none">
                     <li className="nav-item px-3">
-                        <span className="nav-link" onClick={ event => this.props.onFlightsClick()}>
+                        <span className="nav-link" onClick={ event => this.context.activateManager('flight')}>
                             Flights
                         </span>
                     </li>
                     <li className="nav-item px-3">
-                        <span className="nav-link"  onClick={ event => this.props.onReservationsClick()}>
+                        <span className="nav-link"  onClick={ event => this.context.activateManager('reservation')}>
                             Reservations
                         </span>
                     </li>
                     <li className="nav-item px-3">
-                        <span className="nav-link"  onClick={ event => this.props.onAdminToolsClick()}>
+                        <span className="nav-link"  onClick={ event => this.context.activateManager('admin-tool')}>
                             Admin Tools
                         </span>
                     </li>

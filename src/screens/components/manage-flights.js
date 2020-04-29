@@ -9,6 +9,9 @@ class ManageFlight extends Component {
     }
 
     render(){
+
+        console.log(this.state)
+
         return (
 
             <div>
@@ -24,10 +27,12 @@ class ManageFlight extends Component {
                                 <div className="col-md-12">
                                     <div className="input-group">
                                         <span className="input-group-prepend">
-                                        <button className="btn btn-primary" type="button">
+                                        <button className="btn btn-primary" type="button" onClick={()=>{
+                                                this.setState({showViewFor: 'flights', search: this.search_flight.value.trim()});
+                                            }}>
                                             <i className="fa fa-search"></i> Search</button>
                                         </span>
-                                        <input className="form-control" id="input1-group2" type="text" name="input1-group2" placeholder="flight id"/>
+                                        <input className="form-control" ref={view => this.search_flight = view}  id="input1-group2" type="text" name="input1-group2" placeholder="id, type, ... destination, departure"/>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +48,7 @@ class ManageFlight extends Component {
                         <div className="row">
                             <div className="col-12">
                                 {this.state.showViewFor === 'add-flight' && <AdminAddFlight/>}
-                                {this.state.showViewFor === 'flights' && <AdminViewFlights/>}
+                                {this.state.showViewFor === 'flights' && <AdminViewFlights search={this.state.search}/>}
                             </div>
 
                         </div>

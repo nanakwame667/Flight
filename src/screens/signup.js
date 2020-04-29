@@ -13,15 +13,11 @@ import "./assets/vendor/daterangepicker/daterangepicker.css";
 import "./assets/css/util.css";
 import "./assets/css/main.css";
 
+const { BASE_API_URL } = require('../utils/constants');
 
 const axiosRestClient = require('axios-rest-client').default;
-const api = axiosRestClient({baseUrl: "http://localhost:5000/"});
+const api = axiosRestClient({baseUrl: BASE_API_URL});
 
-
-
-// res.header("Access-Control-Allow-Origin", "*");
-// res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 class SignupScreen extends Component {
 
     state = {};

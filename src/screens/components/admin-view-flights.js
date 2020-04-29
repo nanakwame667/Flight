@@ -1,41 +1,85 @@
 import React, { Component } from 'react';
 import ReservationsListItem from './flights-list-item';
+import AppContext from '../../config/app-context';
+
+const axiosRestClient = require('axios-rest-client').default;
+
+const { BASE_API_URL } = require('../../utils/constants');
 
 class AdminViewReservations extends Component {
+    
+    state = { data: [] }
+    static contextType = AppContext;
 
-    constructor(props){
-        super(props);
+    constructor(props, context){
+        super(props, context);
+        this.displayFlights();
     }
 
-    getAllReservationItems(){
-        return [
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 1', email: 'example1@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 2', email: 'example2@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 3', email: 'example3@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 4', email: 'example4@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 5', email: 'example5@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 6', email: 'example6@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 8', email: 'example7@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 8', email: 'example8@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 9', email: 'example9@gmail.com', phone: '0240000000'},
-            {fristname: 'Firstname', middlename: 'MiddlnName', lastname: 'Lastname 10', email: 'example10@gmail.com', phone: '0240000000'}
-        ]
+    displayFlights = async () => {
+        
+        let token = this.context.token;       
+        let key = this.props.search;
+        let whereClause = {};
+
+        if (key){
+            whereClause = {
+                $or : [
+                    {
+                        departureCity: {
+                            $like : '%'+key+'%'
+                        }
+                    },
+                    {   destinationCity: {
+                            $like : '%'+key+'%'
+                        }
+                    },
+                    {   flightType: {
+                            $like : '%'+key+'%'
+                        }
+                    },
+                    {   price: {
+                            $like : '%'+key+'%'
+                        }
+                    } 
+                ]
+            }
+        }
+
+        console.log(key, whereClause)
+        
+        const api = axiosRestClient({
+            baseUrl: BASE_API_URL+'flight/', 
+            headers:{
+                auth_token: token
+            }
+        });
+
+        api.query.create({
+            where: whereClause
+        }).then(({data})=>{
+            this.setState({data: data.result.data});
+        }).catch(err=>{
+            console.log(err);
+        });
+
+        
     }
 
     render(){
         return (
                <div className="card">
                   <div className="card-header">
-                    <i className="fa fa-align-justify"></i> Reservations Items
+                    <i className="fa fa-align-justify"></i> Flight Items
                     <small> (list of all registered reservations)</small>
                   </div>
                   <div className="card-body">
                     <div className="list-group">
-                        {
-                            this.getAllReservationItems().map((item, i) => {
-                                return <ReservationsListItem item={item} key={1}/>
-                            })
-                        }
+                    {
+                        this.state.data.map((item, i)=>{
+                            return <ReservationsListItem item={item} key={i}/>
+                        })
+                    }
                     </div>
                   </div>
                 </div>

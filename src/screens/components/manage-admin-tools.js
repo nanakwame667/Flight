@@ -4,8 +4,10 @@ import AdminViewReservations from './admin-view-reservations';
 import AdminAddReservation from './admin-add-reservation';
 import AdminReservationItem from './admin-reservation-item';
 
-
+import AppContext from '../../config/app-context';
 class AdminTools extends Component {
+
+    static contextType = AppContext;
 
     state = {
         actiavateViewFor: 'home'

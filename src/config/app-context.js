@@ -5,11 +5,10 @@ const AppContext = React.createContext();
 export class AppProvider extends React.Component{
 
     updateState = state => {
-        localStorage.setItem("token", state.token === null ? undefined: state.token);
-        localStorage.setItem("user", state.user === null ? undefined: JSON.stringify(state.user));
-        localStorage.setItem("admin", state.admin === null ? undefined: JSON.stringify(state.admin));
+        if (typeof state.token !== 'undefined') localStorage.setItem("token", state.token === null ? undefined: state.token);
+        if (typeof state.user !== 'undefined') localStorage.setItem("user", state.user === null ? undefined: JSON.stringify(state.user));
+        if (typeof state.admin !== 'undefined') localStorage.setItem("admin", state.admin === null ? undefined: JSON.stringify(state.admin));
         this.setState(state);
-       
      }
     
     state = {

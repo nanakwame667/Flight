@@ -12,12 +12,13 @@ import "./assets/vendor/select2/select2.min.css";
 import "./assets/vendor/daterangepicker/daterangepicker.css";
 import "./assets/css/util.css";
 import "./assets/css/main.css";
-
-
 import { AppConsumer } from '../config/app-context';
 
+const { BASE_API_URL } = require('../utils/constants');
+
+
 const axiosRestClient = require('axios-rest-client').default;
-const api = axiosRestClient({baseUrl: "http://localhost:5000/admin/"});
+const api = axiosRestClient({baseUrl: BASE_API_URL+"admin/"});
 
 // api.users.all()               // GET /users
 // api.users.find(1)             // Get /users/1
@@ -51,6 +52,8 @@ class LoginScreen extends Component {
             else{
                 this.setState({loginFailed: true, message: data.result.message}); 
             }
+        }).catch(err=>{
+            console.log(err);
         });
     }
 
