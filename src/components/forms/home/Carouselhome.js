@@ -33,7 +33,45 @@ function HomeCarousel (){
           height="700px"
           alt="Second slide"
         />
-
+        <Carousel.Caption>
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </Carousel.Caption>
+    </Carousel.Item>
+    <Carousel.Item>
+      <img
+        className="d-block w-100"
+        src={require('../../../Images/carousel4.jfif')}
+        width="100%"
+        height="700px"
+        alt="Second slide"
+      />
+      <Carousel.Caption>
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src={require('../../../Images/carousel5.jfif')}
+      width="100%"
+      height="700px"
+      alt="Second slide"
+    />
+    <Carousel.Caption>
+    <h3>First slide label</h3>
+    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+  </Carousel.Caption>
+</Carousel.Item>
+<Carousel.Item>
+  <img
+    className="d-block w-100"
+    src={require('../../../Images/carousel6.jfif')}
+    width="100%"
+    height="700px"
+    alt="Second slide"
+  />
         <Carousel.Caption>
           <h3>Second slide label</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

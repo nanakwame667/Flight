@@ -2,13 +2,14 @@ import React,{useState} from 'react';
 
 import {Form,Container,Modal,Button,Alert} from 'react-bootstrap';
 
+import PhoneInput from 'react-phone-number-input';
 
 
 function UserForm (props){
     const [validated, setValidated] = useState(false);
     const [formShow,setFormShow]  = useState(true);
     const [formShow1,setFormShow1]= useState(false);
-    
+    const [value, setValue] = useState();
     
    const twoFun=(event)=>{
         setFormShow(false);
@@ -40,19 +41,18 @@ function UserForm (props){
     >
     
     <Modal.Header closeButton>
-          <Modal.Title  style={{marginLeft:'130px',marginBottom:'20px',marginTop:'10px',fontSize:'30px'}} >Flight-Booky</Modal.Title>
+          <Modal.Title  style={{marginLeft:'130px',marginBottom:'10px',marginTop:'10px',fontSize:'30px'}} >Flight-Booky</Modal.Title>
           <a href="/admin/login" style={{marginLeft:'80px'}}>Admin?</a>
           </Modal.Header>
         <Modal.Body>
         <Alert show={formShow} style={{justifyContent:'center'}}>
-        <Container style={{width:'500px',height:'580px'}} fluid>
+        <Container style={{width:'500px',height:'515px'}} fluid>
         
-        <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'10px'}}>
+        <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}>
   <Form.Group controlId="formBasicEmail">
   <h3 style={{fontSize:'30px'}}>Hey!! Good to see you again</h3>
-  <p style={{fontSize:'15px'}}>Sign in for member-only deals and access to your Trip <br/> details.</p>
-    <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
-    <Form.Control required type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
+  <p style={{fontSize:'15px'}}>Sign in for member-only deals and access to your Trip <br/> details.</p><br/>
+    <Form.Control required type="email" placeholder="Email" style={{width:'400px'}} size="lg" />
     <Form.Text className="text-muted">
       Example: example@example.com
     </Form.Text>
@@ -62,7 +62,6 @@ function UserForm (props){
   </Form.Group>
   
   <Form.Group controlId="formBasicPassword">
-    <Form.Label style={{fontSize:"20px"}}>Password</Form.Label>
     <Form.Control required type="password" placeholder="Password" style={{width:'400px'}} size="lg"/>
     <Form.Control.Feedback type="invalid">
     Please enter a correct password
@@ -116,13 +115,20 @@ function UserForm (props){
         </Container>
         </Alert>
         <Alert show={formShow1} style={{justifyContent:'center'}}>
-        <Container style={{width:'500px',height:'560px'}} fluid>
-        <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'30px'}}>
+        <Container style={{width:'500px',height:'520px'}} fluid>
+        <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}>
   <Form.Group controlId="formBasicEmail">
-  <h3 style={{marginTop:'30px',fontSize:'30px'}}>Sign Up and Save</h3>
+  <h3 style={{fontSize:'30px'}}>Sign Up and Save</h3>
         <p style={{fontSize:'15px'}}>Create an account now for access to member-only deals.</p>
-    <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
-    <Form.Control required type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
+        <div style={{display:'flex'}}>
+        <Form.Control required type="email" placeholder="FullName" style={{width:'200px'}} size="lg" /><br/>
+        <PhoneInput
+        style={{width:'200px',marginLeft:'10px'}}
+      placeholder="Enter phone number"
+      value={value}
+      onChange={setValue}/></div>
+        <br/>
+    <Form.Control required type="email" placeholder="Email" style={{width:'400px'}} size="lg" />
     <Form.Text className="text-muted">
       Example: example@example.com
     </Form.Text>
@@ -132,7 +138,6 @@ function UserForm (props){
   </Form.Group>
   
   <Form.Group controlId="formBasicPassword">
-    <Form.Label style={{fontSize:"20px"}}>Password</Form.Label>
     <Form.Control required type="password" placeholder="Password" style={{width:'400px'}} size="lg"/>
     <Form.Control.Feedback type="invalid">
     Please enter a correct password
@@ -153,7 +158,7 @@ function UserForm (props){
   <Button variant="primary" type="submit" size="sm"style={{fontSize:'20px',width:'400px'}} >
     Create an Account
   </Button>
-  <p style={{fontSize:'18px',color:'blue',marginTop:'15px',textAlign:'center',marginRight:'65px'}}>or</p>
+  <p style={{fontSize:'18px',color:'blue',marginTop:'10px',textAlign:'center',marginRight:'65px'}}>or</p>
   <Form.Group style={{display:'flex'}}>
 <Button variant="outline-primary" size="sm" style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'18px',width:'200px'}}>
 <img
@@ -176,7 +181,7 @@ style={{marginRight:'50px'}}
 Facebook
 </Button>
   </Form.Group>
-  <div style={{display:'flex',marginTop:'30px'}}>
+  <div style={{display:'flex',marginTop:'20px'}}>
 <p style={{marginTop:'5px'}}>Have an account?</p>
 <Button variant="outline-primary" size="md" style={{marginLeft:'230px'}} onClick={twoFun1} >Sign In</Button>
 </div>

@@ -5,6 +5,10 @@ import Toast from 'react-bootstrap/Toast';
 
 import { RangeDatePicker,SingleDatePicker } from 'react-google-flight-datepicker';
 
+import '../../css/styles.css';
+
+import SearchResults from './SearchResults';
+
 class FlightSearch extends Component{
     constructor(props) {
         super(props);
@@ -41,7 +45,8 @@ class FlightSearch extends Component{
             lapInfant: 0,
             tripClass: 'economy',
             show1: true,
-            show2: false
+            show2: false,
+            show3: false
         };
     }
         twoFun=(event)=>{
@@ -57,6 +62,10 @@ class FlightSearch extends Component{
             this.showState1anx(event),
             this.showState2(event)
         )
+    }
+    // render new component
+    handleComponent=(event)=>{
+        this.setState({show3:true})
     }
     // handles navDropDown change
     handleChange1=(event)=>{
@@ -195,6 +204,7 @@ class FlightSearch extends Component{
             <div  style={{fontSize:'20px',fontFamily:'sans-serif'}}>
             <Nav>
             <NavDropdown 
+            style={{fontSize:'130%'}}
             title={Title1} 
             id="collasible-nav-dropdown" 
            >
@@ -266,7 +276,7 @@ class FlightSearch extends Component{
   <Form.Group as={Col}>
       <InputGroup>
       <Form.Control
-      style={{width:'15rem',height:'67px',marginRight:'12px',borderRadius:'7px'}}
+      style={{width:'10rem',height:'67px',marginRight:'12px',borderRadius:'7px'}}
       type="text"
       placeholder="From?"
       />
@@ -278,12 +288,13 @@ class FlightSearch extends Component{
       
       /></Button>
       <Form.Control
-      style={{width:'15rem',height:'67px',marginRight:'30px',marginLeft:'20px',borderRadius:'7px'}}
+      style={{width:'150px',height:'67px',marginRight:'5px',marginLeft:'20px',borderRadius:'7px'}}
       type="text"
       placeholder="To?"
       />
+      <div style={{width:'29rem',height:'2rem',marginLeft:'5px'}}>
       <SingleDatePicker startDate={new Date(2020, 0, 15)} />
-      
+      </div>
       </InputGroup>
   </Form.Group>
 </Form.Row>
@@ -292,10 +303,14 @@ class FlightSearch extends Component{
   </Navbar>
   <div >
   
-  <Button variant="outline-light" style={{marginLeft:'50px',marginTop:'7px',width:'10rem',height:'4rem',borderRadius:'350px'}} >Search</Button>{' '}
+  <Button variant="outline-light"
+   style={{marginLeft:'50px',marginTop:'3px',width:'10rem',height:'4rem',borderRadius:'350px',textAlign:'center'}} 
+   href="/flights/Search" exact component={SearchResults}
+   >Search</Button>{' '}
   </div>
   </div>
             </div>
+            
         )
     }
 }
