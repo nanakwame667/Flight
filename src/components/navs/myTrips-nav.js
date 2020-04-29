@@ -11,8 +11,8 @@ function Trips (){
         src={require('../../Images/trip.png')}
         width="25"
         height="25"
-        className="d-inline-block align-top"
-        alt="React Bootstrap logo"
+        className="d-inline-block align-top mr-1"
+        alt=""
         
       />
         My trips</Nav.Link>

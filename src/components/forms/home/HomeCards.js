@@ -2,12 +2,10 @@ import React from 'react';
 
 import {Card,CardDeck,Container,Button} from 'react-bootstrap';
 
-
-
 function HomeCards (){
     return(
-      <Container fluid>
-        <CardDeck collapseOnselect style={{width:'80%',marginLeft:'160px', alignContent:'center'}}>
+      <Container fluid="true">
+        <CardDeck style={{width:'80%',marginLeft:'160px', alignContent:'center'}}>
         <Card style={{height:'70%',borderRadius:'15px'}} className="shadow-sm p-3 mb-5 bg-white rounded">
           <Card.Img variant="top" src={require('../../../Images/people.jpg')} style={{height:'200px'}}/>
           <Card.Body>

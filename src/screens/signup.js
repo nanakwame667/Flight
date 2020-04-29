@@ -54,7 +54,7 @@ class SignupScreen extends Component {
             api.admin.create({
                 firstname: names[0],
                 lastname: names.length > 1 ? names[1] : null,
-                othername: names.length > 2 ? names[2] : null,
+                othername: names.length > 2 ? names.slice(2).join(' ') : null,
                 username: username,
                 password: password,
                 reg_pass: reg_pass

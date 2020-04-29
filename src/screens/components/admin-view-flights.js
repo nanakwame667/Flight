@@ -22,29 +22,29 @@ class AdminViewReservations extends Component {
         let key = this.props.search;
         let whereClause = {};
 
-        if (key){
-            whereClause = {
-                $or : [
-                    {
-                        departureCity: {
-                            $like : '%'+key+'%'
-                        }
-                    },
-                    {   destinationCity: {
-                            $like : '%'+key+'%'
-                        }
-                    },
-                    {   flightType: {
-                            $like : '%'+key+'%'
-                        }
-                    },
-                    {   price: {
-                            $like : '%'+key+'%'
-                        }
-                    } 
-                ]
-            }
-        }
+        // if (key){
+        //     whereClause = {
+        //         $or : [
+        //             {
+        //                 departureCity: {
+        //                     $like : '%'+key+'%'
+        //                 }
+        //             },
+        //             {   destinationCity: {
+        //                     $like : '%'+key+'%'
+        //                 }
+        //             },
+        //             {   flightType: {
+        //                     $like : '%'+key+'%'
+        //                 }
+        //             },
+        //             {   price: {
+        //                     $like : '%'+key+'%'
+        //                 }
+        //             } 
+        //         ]
+        //     }
+        // }
 
         console.log(key, whereClause)
         

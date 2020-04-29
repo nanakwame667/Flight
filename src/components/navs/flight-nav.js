@@ -15,10 +15,8 @@ function Flight(){
           src={require('../../Images/flight-icon.png')}
           width="30"
           height="25"
-          className="d-inline-block align-top"
-          alt="React Bootstrap logo"
-          
-        />
+          className="d-inline-block align-top mr-1"
+          alt=""/>
           Flights</Nav.Link>
           </Nav.Item>
           </Nav>
