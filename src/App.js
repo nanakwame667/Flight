@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
-import FlightsPage from './components/pages/FlightsPage';
-import HomePage from './components/pages/HomePage';
-import SignUpPage from './components/pages/SignUpPage';
-import ErrorPage from './components/pages/404ErrorPage';
+import { AppProvider } from './config/app-context';
+import AdminDashboardPage from './screens/dashboard';
 import AdminLoginPage from './screens/login';
 import AdminRegisterPage from './screens/signup';
-import AdminDashboardPage from './screens/dashboard';
+import SearchResults from './components/forms/SearchResults';
+import ErrorPage from './components/pages/404ErrorPage';
+import FlightsPage from './components/pages/FlightsPage';
+import HomePage from './components/pages/HomePage';
 
-import { AppProvider } from './config/app-context';
 
 function App() {
   return (
@@ -19,9 +19,6 @@ function App() {
         <Switch>
           <Route path="/" exact>
               <HomePage/>
-          </Route>
-          <Route path="/signup" exact>
-              <SignUpPage/>
           </Route>
           <Route path="/flight" exact>
               <FlightsPage/>

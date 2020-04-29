@@ -3,9 +3,9 @@ import React,{useState, useContext} from 'react';
 import {Form,Container,Modal,Button,Alert} from 'react-bootstrap';
 import AppContext from '../../config/app-context';
 
+
 const { BASE_API_URL } = require('../../utils/constants');
 const axiosRestClient = require('axios-rest-client').default;
-
 
 function UserForm (props){
 
@@ -18,7 +18,7 @@ function UserForm (props){
     const [validated, setValidated] = useState(false);
     const [isLogin,isShowLogin] = useState(true);
     const [isSignup,isShowSignup]= useState(false);
-    
+
     
     const showSignupModal=(event)=>{
       setError('');
@@ -91,88 +91,88 @@ function UserForm (props){
 
     return(
       <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered fluid="true">
-    
+  
         <Modal.Header closeButton>
           <Modal.Title  style={{marginLeft:'130px',marginBottom:'20px',marginTop:'10px',fontSize:'30px'}} >Flight-Booky</Modal.Title>
-          <a href="/admin/login" style={{marginLeft:'80px'}}>Admin?</a>
+
+          <a href="/admin/login" onClick={ () => {context.showUserModal(false)} } style={{marginLeft:'80px'}}>Admin?</a>
         </Modal.Header>
         <Modal.Body>
-        <Alert show={isLogin} style={{justifyContent:'center'}}>
-          <Container style={{width:'500px',height:'580px'}} fluid="true">
-              { errorMessage && <p className="lead text-danger text-center">{errorMessage}</p> }
-              <h3 style={{fontSize:'30px'}}>Hey!! Good to see you again</h3>
-              <p style={{fontSize:'15px'}}>Sign in for member-only deals and access to your Trip <br/> details.</p>
-              
-              <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'10px'}}>
-                <Form.Group controlId="formBasicEmail">
-               
-                  <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
-                  <Form.Control value={email}  onChange={ (e)=>{ setEmail(e.target.value) } } required type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
-                  <Form.Text className="text-muted">
-                    Example: example@example.com  
-                  </Form.Text>
-                  <Form.Control.Feedback type="invalid">
-                  Please enter a valid email address.
-                </Form.Control.Feedback>
-                </Form.Group>
+          <Alert show={isLogin} style={{justifyContent:'center'}}>
+            <Container style={{width:'500px',height:'580px'}} fluid="true">
+                { errorMessage && <p className="lead text-danger text-center">{errorMessage}</p> }
+                <h3 style={{fontSize:'30px'}}>Hey!! Good to see you again</h3>
+                <p style={{fontSize:'15px'}}>Sign in for member-only deals and access to your Trip <br/> details.</p>
                 
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label style={{fontSize:"20px"}}>Password</Form.Label>
-                  <Form.Control value={password} onChange={ (e)=>{ setPassword(e.target.value) } } required type="password" placeholder="Password" style={{width:'400px'}} size="lg"/>
-                  <Form.Control.Feedback type="invalid">
-                  Please enter a correct password
-                </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox" style={{display:'flex'}}>
-                {['checkbox'].map((type) => (
-                  <div key={`custom-${type}`} className="mb-3">
-                    <Form.Check 
-                      custom
-                      type={type}
-                      id={`custom-${type}`}
-                      label={`Remember Me`}
-                    />
-                    </div>
-                    ))}
-                  <a href="#password" style={{marginLeft:'120px'}}>Forgot Password?</a>
-                </Form.Group>
-                <Button variant="primary" type="submit" size="sm"style={{fontSize:'20px',width:'400px'}} >
-                  Sign In
-                </Button>
-                <p style={{fontSize:'18px',color:'blue',marginTop:'15px',textAlign:'center',marginRight:'65px'}}>or</p>
-                <Form.Group style={{display:'flex'}}>
-                <Button variant="outline-primary" size="lg" style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'18px',width:'200px'}}>
-                <img
-                src={require('../../Images/google-icon.webp')}
-                alt="Google"
-                width="20px"
-                height="20px"
-                style={{marginRight:'50px'}}
-                />
-                Google
-                </Button>
-                <Button variant="outline-primary" size="lg" style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'18px',marginLeft:'15px',width:'200px'}}>
-                <img
-                src={require('../../Images/facebook-icon.png')}
-                alt="Google"
-                width="30px"
-                height="30px"
-                style={{marginRight:'50px'}}
-                />
-                Facebook
-                </Button>
-                </Form.Group>
-                <div style={{display:'flex',marginTop:'30px'}}>
-                <p style={{marginTop:'5px'}}>Don't have an account?</p>
-                <Button variant="outline-primary" size="md" style={{marginLeft:'140px'}}  onClick={showSignupModal}>Create Account</Button>
-                </div>
-              </Form>
+                <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'10px'}}>
+                  <Form.Group controlId="formBasicEmail">
                 
-          </Container>
-        </Alert>
-        
-        
-        <Alert show={isSignup} style={{justifyContent:'center'}}>
+                    <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
+                    <Form.Control value={email}  onChange={ (e)=>{ setEmail(e.target.value) } } required type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
+                    <Form.Text className="text-muted">
+                      Example: example@example.com  
+                    </Form.Text>
+                    <Form.Control.Feedback type="invalid">
+                    Please enter a valid email address.
+                  </Form.Control.Feedback>
+                  </Form.Group>
+                  
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label style={{fontSize:"20px"}}>Password</Form.Label>
+                    <Form.Control value={password} onChange={ (e)=>{ setPassword(e.target.value) } } required type="password" placeholder="Password" style={{width:'400px'}} size="lg"/>
+                    <Form.Control.Feedback type="invalid">
+                    Please enter a correct password
+                  </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group controlId="formBasicCheckbox" style={{display:'flex'}}>
+                  {['checkbox'].map((type) => (
+                    <div key={`custom-${type}`} className="mb-3">
+                      <Form.Check 
+                        custom
+                        type={type}
+                        id={`custom-${type}`}
+                        label={`Remember Me`}
+                      />
+                      </div>
+                      ))}
+                    <a href="#password" style={{marginLeft:'120px'}}>Forgot Password?</a>
+                  </Form.Group>
+                  <Button variant="primary" type="submit" size="sm"style={{fontSize:'20px',width:'400px'}} >
+                    Sign In
+                  </Button>
+                  <p style={{fontSize:'18px',color:'blue',marginTop:'15px',textAlign:'center',marginRight:'65px'}}>or</p>
+                  <Form.Group style={{display:'flex'}}>
+                  <Button variant="outline-primary" size="lg" style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'18px',width:'200px'}}>
+                  <img
+                  src={require('../../Images/google-icon.webp')}
+                  alt="Google"
+                  width="20px"
+                  height="20px"
+                  style={{marginRight:'50px'}}
+                  />
+                  Google
+                  </Button>
+                  <Button variant="outline-primary" size="lg" style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'18px',marginLeft:'15px',width:'200px'}}>
+                  <img
+                  src={require('../../Images/facebook-icon.png')}
+                  alt="Google"
+                  width="30px"
+                  height="30px"
+                  style={{marginRight:'50px'}}
+                  />
+                  Facebook
+                  </Button>
+                  </Form.Group>
+                  <div style={{display:'flex',marginTop:'30px'}}>
+                  <p style={{marginTop:'5px'}}>Don't have an account?</p>
+                  <Button variant="outline-primary" size="md" style={{marginLeft:'140px'}}  onClick={showSignupModal}>Create Account</Button>
+                  </div>
+                </Form>
+                  
+            </Container>
+          </Alert>
+          
+          <Alert show={isSignup} style={{justifyContent:'center'}}>
          
           <Container style={{width:'500px',height:'560px'}} fluid="true">
            { errorMessage && <p className="lead text-danger text-center">{errorMessage}</p> }
