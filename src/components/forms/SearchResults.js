@@ -1,13 +1,11 @@
 import React,{Component} from  'react';
 
 import 
-{Nav,Navbar,NavDropdown,Form,Alert,InputGroup,Button,Col,Container,DropdownButton,Dropdown,Card} from 'react-bootstrap';
+{Nav,Navbar,NavDropdown,Form,Alert,InputGroup,Button,Col,Container,DropdownButton,Dropdown,Card,CardGroup,CardDeck} from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-import ListGroup from 'react-bootstrap/ListGroup';
+import {Tooltip,OverlayTrigger} from 'react-bootstrap';
 
 import { RangeDatePicker,SingleDatePicker } from 'react-google-flight-datepicker';
-
-import { Select } from 'semantic-ui-react';
 
 import NavBar from '../forms/home/NavBar';
 
@@ -26,6 +24,7 @@ class SearchResults extends Component{
             show3: false
     }
 }
+
 twoFun=(event)=>{
     return(
         this.handleChange1(event),
@@ -208,7 +207,7 @@ twoFun1=(event)=>{
     </DropdownButton>
     </div>
     </div>
-    <div>
+    <div style={{display:'flex',marginTop:'10px'}}>
     <Accordion>
     
   <Card border='light' style={{ width: '18rem',backgroundColor:'#F0FFF0' }}>
@@ -265,6 +264,135 @@ twoFun1=(event)=>{
  
   </Card>
 </Accordion>
+
+<CardGroup>
+<Card style={{borderWidth:'2px',borderRadius:'10px',borderColor:'#20B2AA',width:'60rem',height:'70px'}}>
+<Card.Body style={{display:'flex'}}>
+<img
+src={require('../../Images/flight-icon4.png')}
+alt='icon'
+width='25px' height='25px'
+/>
+<p style={{fontSize:'18px',fontFamily:'sans-serif',marginLeft:'5px'}}>Look out for airlines with flexible tickets - this often means you can cancel or change your dates for free.</p></Card.Body>
+</Card>
+<CardDeck style={{display:'flex',marginTop:'10px',borderRadius:'7px'}}>
+{['top'].map((placement) => (
+    <>
+      <OverlayTrigger
+        key={placement}
+        placement={placement}
+        overlay={
+          <Tooltip id={`tooltip-${placement}`}>
+          We think these flights offer the best combination of<br/>
+          of price and speed.We also consider factors like<br/> number of
+          stops and hassle.And if your preferences allow.<br/>
+          we'll personalize your search results
+          </Tooltip>
+        }
+      >
+      <Card style={{width:'25rem',height:'130px',borderRadius:'10px'}}>
+<Card.Body>
+<p>Best</p>
+<p> GH 768</p>
+<p>On 40 (average)</p>
+</Card.Body>
+</Card>
+      </OverlayTrigger>{' '}
+    </>
+  ))}
+  {['top'].map((placement) => (
+    <>
+      <OverlayTrigger
+        key={placement}
+        placement={placement}
+        overlay={
+          <Tooltip id={`tooltip-${placement}`}>
+            Sort by Cheapest price
+          </Tooltip>
+        }
+      >
+      <Card style={{width:'25rem',height:'130px',borderRadius:'10px'}}>
+      <Card.Body>
+      <p>Cheapest</p>
+      <p> GH 768</p>
+      <p>On 40 (average)</p>
+      </Card.Body>
+      </Card>
+      </OverlayTrigger>{' '}
+    </>
+  ))}
+  {['top'].map((placement) => (
+    <>
+      <OverlayTrigger
+        key={placement}
+        placement={placement}
+        overlay={
+          <Tooltip id={`tooltip-${placement}`}>
+           Sort by shortest duration
+          </Tooltip>
+        }
+      >
+      <Card style={{width:'25rem',height:'130px',borderRadius:'10px'}}>
+<Card.Body>
+<p>Fastest</p>
+<p> GH 768</p>
+<p>On 40 (average)</p>
+</Card.Body>
+</Card>
+      </OverlayTrigger>{' '}
+    </>
+  ))}
+
+</CardDeck>
+
+<div style={{display:'flex',borderRadius:'7px', marginTop:'10px'}}>
+<div>
+
+  <Card style={{width:'49rem',height:'160px',borderRadius:'10px'}}>
+  <Card.Body>
+  <p>Best</p>
+  <p> GH 768</p>
+  <p>On 40 (average)</p>
+  </Card.Body>
+  </Card>
+</div>
+<div>
+<Card style={{width:'25rem',height:'160px',borderRadius:'10px'}}>
+<p style={{fontSize:'28px',marginLeft:'80px',fonWeight:'bolder',marginTop:'10px'}}> GH<img 
+src={require('../../Images/cedi-icon.png')}
+alt='cedi' width='20px' height='20px'
+/>768</p>
+<Card.Body>
+<Button variant="outline-primary" style={{height:'40px',marginLeft:'80px'}}>
+  <div style={{display:'flex'}}>
+  <div style={{fontSize:'22px',color:'#4682B4',fontWeight:'bold'}}>Select</div>
+  </div>
+  </Button>
+</Card.Body>
+</Card>
+</div>
+</div>
+<div style={{display:'flex',borderRadius:'7px', marginTop:'5px'}}>
+  <Card style={{width:'74rem',height:'160px',borderRadius:'10px'}}>
+  <Card.Body>
+  <div style={{marginBottom:'15px'}}>
+  <p style={{marginLeft:'480px',fontSize:'20px',fontWeight:'bolder'}}>Like these flights?</p>
+  <p style={{marginLeft:'400px',fontSize:'15px'}}> We'll let you know when prices go up and down</p>
+  </div>
+  <Button variant="outline-primary" style={{height:'40px',marginLeft:'480px'}}>
+  <div style={{display:'flex'}}>
+  <div style={{fontSize:'18px',color:'#4682B4',fontWeight:'bold'}}>Track prices</div>
+  </div>
+  </Button>
+  </Card.Body>
+  </Card>
+</div><br/>
+<Button variant="outline-primary" style={{height:'40px',marginLeft:'480px'}}>
+    <div style={{display:'flex'}}>
+    <div style={{fontSize:'18px',color:'#4682B4',fontWeight:'bold'}}>Show More Results</div>
+    </div>
+    </Button>
+</CardGroup>
     </div>
     </div>
   </Container>
