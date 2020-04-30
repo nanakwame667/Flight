@@ -6,7 +6,6 @@ import { AppProvider } from './config/app-context';
 import AdminDashboardPage from './screens/dashboard';
 import AdminLoginPage from './screens/login';
 import AdminRegisterPage from './screens/signup';
-import SearchResults from './components/forms/SearchResults';
 import ErrorPage from './components/pages/404ErrorPage';
 import FlightsPage from './components/pages/FlightsPage';
 import HomePage from './components/pages/HomePage';

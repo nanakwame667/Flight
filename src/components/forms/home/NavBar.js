@@ -6,7 +6,7 @@ import {Nav,Container} from 'react-bootstrap';
 
 import Flight from '../../navs/flight-nav';
 import Login from '../../navs/login-nav';
-import Trips from '../../navs/myTrips-nav';
+import Trips from '../../navs/trips-nav';
 
 function NavBar (){
     return(

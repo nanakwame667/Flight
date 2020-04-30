@@ -18,7 +18,6 @@ function UserForm (props){
     const [validated, setValidated] = useState(false);
     const [isLogin,isShowLogin] = useState(true);
     const [isSignup,isShowSignup]= useState(false);
-
     
     const showSignupModal=(event)=>{
       setError('');
@@ -43,10 +42,10 @@ function UserForm (props){
             email: email.trim(),
             password: password.trim()
           }).then(({data})=>{
-            if (data.status === 'sucuess'){
+            if (data.status === 'success'){
               setValidated(false);
               context.updateState({user: data.result.data.user, token: data.result.data.token});
-              context.showUserModal(false);
+              props.showModal(false);
               console.log(context);
             }
             else{
@@ -70,7 +69,7 @@ function UserForm (props){
             lastname: names.length > 1 ? names[1] : '',
             othername: names.length > 2 ? names.slice(2).join(' ') :  ''
           }).then(({data})=>{
-            if (data.status === 'sucuess'){
+            if (data.status === 'success'){
               setValidated(true);
               showSignupModal();
             }
@@ -94,12 +93,11 @@ function UserForm (props){
   
         <Modal.Header closeButton>
           <Modal.Title  style={{marginLeft:'130px',marginBottom:'20px',marginTop:'10px',fontSize:'30px'}} >Flight-Booky</Modal.Title>
-
-          <a href="/admin/login" onClick={ () => {context.showUserModal(false)} } style={{marginLeft:'80px'}}>Admin?</a>
+          <a href="/admin/login" onClick={ () => {props.showModal(false)} } style={{marginLeft:'80px'}}>Admin?</a>
         </Modal.Header>
         <Modal.Body>
           <Alert show={isLogin} style={{justifyContent:'center'}}>
-            <Container style={{width:'500px',height:'580px'}} fluid="true">
+            <Container style={{width:'500px',height:'max-content'}} fluid="true">
                 { errorMessage && <p className="lead text-danger text-center">{errorMessage}</p> }
                 <h3 style={{fontSize:'30px'}}>Hey!! Good to see you again</h3>
                 <p style={{fontSize:'15px'}}>Sign in for member-only deals and access to your Trip <br/> details.</p>
@@ -174,7 +172,7 @@ function UserForm (props){
           
           <Alert show={isSignup} style={{justifyContent:'center'}}>
          
-          <Container style={{width:'500px',height:'560px'}} fluid="true">
+          <Container style={{width:'500px',height:'max-content'}} fluid="true">
            { errorMessage && <p className="lead text-danger text-center">{errorMessage}</p> }
             <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'30px'}}>
 

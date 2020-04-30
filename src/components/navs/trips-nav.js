@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Nav} from 'react-bootstrap';
-
+import AppContext from '../../config/app-context';
+    
 
 function Trips (){
+    let context = useContext(AppContext);
     return(
-        <Nav>
+        context.user && <Nav>
         <Nav.Item>
-        <Nav.Link href="#myTrips" style={{marginLeft:'10px'}}>
+        <Nav.Link href="/reservations">
         <img
         src={require('../../Images/trip.png')}
         width="25"
         height="25"
         className="d-inline-block align-top mr-1"
-        alt=""
-        
-      />
-        My trips</Nav.Link>
+        alt="" />
+        Reservations</Nav.Link>
         </Nav.Item>
         </Nav>
     )
