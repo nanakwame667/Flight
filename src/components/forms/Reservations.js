@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Table,Container,Card,Button} from 'react-bootstrap';
+import {Container,Card,Button} from 'react-bootstrap';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 

@@ -6,9 +6,9 @@ import { AppProvider } from './config/app-context';
 import AdminDashboardPage from './screens/dashboard';
 import AdminLoginPage from './screens/login';
 import AdminRegisterPage from './screens/signup';
+import FlightSearch from './components/forms/FlightSearch';
 import Reservations from './components/forms/Reservations';
 import ErrorPage from './components/pages/404ErrorPage';
-import FlightsPage from './components/pages/FlightsPage';
 import HomePage from './components/pages/HomePage';
 
 
@@ -21,7 +21,7 @@ function App() {
               <HomePage/>
           </Route>
           <Route path="/flight" exact>
-              <FlightsPage/>
+              <FlightSearch/>
           </Route>
           <Route path="/admin/login" exact>
               <AdminLoginPage/>

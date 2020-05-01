@@ -1,18 +1,21 @@
 import React, * as react from 'react';
+
 import {
-  Alert,
   Button,
   Card, CardDeck, CardGroup, Row, Col, Container,
   Dropdown, DropdownButton, Form,
   InputGroup, Nav, Navbar, NavDropdown, OverlayTrigger, Tooltip
 } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
+
 import { RangeDatePicker, SingleDatePicker } from 'react-google-flight-datepicker';
 
-import NavBar from './home/NavBar';
+import AppContext from '../../config/app-context';
+import Footer from './../../screens/components/footer';
+
 import FlightItem from './flight-item';
 
-import AppContext from '../../config/app-context';
+import NavBar from './home/NavBar';
 
 const axiosRestClient = require('axios-rest-client').default;
 const { BASE_API_URL } = require('../../utils/constants');
@@ -327,12 +330,19 @@ class FlightSearch extends react.Component {
                           </Tooltip>
                         }
                       >
-                        <Card style={{ width: '25rem', height: '130px', borderRadius: '10px' }}>
+                        <Card 
+                        style={{ width: '25rem',
+                            height: '130px',
+                            borderRadius: '10px',
+                            backgroundColor:'#87CEFA',
+                            
+                          }}>
                           <Card.Body>
-                            <p>Best</p>
-                            <p> GH 768</p>
-                            <p>On 40 (average)</p>
-                          </Card.Body>
+                          
+                            <p  style={{fontSize:'18px',color:'#2F4F4F'}}>Best<br/>
+                              GH 768<br/>
+                            On 40 (average)</p>
+                            </Card.Body>
                         </Card>
                       </OverlayTrigger>{' '}
                     </>
@@ -348,11 +358,11 @@ class FlightSearch extends react.Component {
                           </Tooltip>
                         }
                       >
-                        <Card style={{ width: '25rem', height: '130px', borderRadius: '10px' }}>
+                        <Card style={{ width: '25rem', height: '130px', borderRadius: '10px',backgroundColor:'#F0E68C' }} variant="outline-primary">
                           <Card.Body>
-                            <p>Cheapest</p>
-                            <p> GH 768</p>
-                            <p>On 40 (average)</p>
+                            <p style={{fontSize:'18px',color:'#2F4F4F'}}>Cheapest<br/>
+                              GH 768<br/>
+                            On 40 (average)</p>
                           </Card.Body>
                         </Card>
                       </OverlayTrigger>{' '}
@@ -369,11 +379,11 @@ class FlightSearch extends react.Component {
                           </Tooltip>
                         }
                       >
-                        <Card style={{ width: '25rem', height: '130px', borderRadius: '10px' }}>
+                        <Card style={{ width: '25rem', height: '130px', borderRadius: '10px' ,backgroundColor:'#7FFFD4'}} variant="outline-info">
                           <Card.Body>
-                            <p>Fastest</p>
-                            <p> GH 768</p>
-                            <p>On 40 (average)</p>
+                            <p style={{fontSize:'18px',color:'#2F4F4F'}}>Fastest<br/>
+                              GH 768<br/>
+                            On 40 (average)</p>
                           </Card.Body>
                         </Card>
                       </OverlayTrigger>{' '}
@@ -384,7 +394,7 @@ class FlightSearch extends react.Component {
 
                 <div style={{ display: 'flex', borderRadius: '7px', marginTop: '10px' }}>
                   <div>
-                    <Card style={{ width: '49rem', height: '160px', borderRadius: '10px' }}>
+                    <Card style={{ width: '49rem', height: '160px', borderRadius: '10px',borderColor:'#87CEFA' }}>
                       <Card.Body>
                         <p>Best</p>
                         <p> GH 768</p>
@@ -393,7 +403,7 @@ class FlightSearch extends react.Component {
                     </Card>
                   </div>
                   <div>
-                    <Card style={{ width: '25rem', height: '160px', borderRadius: '10px' }}>
+                    <Card style={{ width: '25rem', height: '160px', borderRadius: '10px',borderColor:'#87CEFA' }}>
                       <p style={{ fontSize: '28px', marginLeft: '80px', fonWeight: 'bolder', marginTop: '10px' }}> GH<img
                         src={require('../../Images/cedi-icon.png')}
                         alt='cedi' width='20px' height='20px'
@@ -435,8 +445,9 @@ class FlightSearch extends react.Component {
           </Row>
 
         </Container>
-
+        <Footer/>
       </div>
+      
     )
   }
 }

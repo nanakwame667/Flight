@@ -11,7 +11,7 @@ export default class FlightClass extends Component{
         }
         this.handleSelect = this.handleSelect.bind(this);
     }
-   
+    
     handleSelect=(event)=>{
         event=event.target.select
         this.setState({select:event})
@@ -27,7 +27,7 @@ export default class FlightClass extends Component{
         <option onSelect={this.handleSelect} >Business</option>
         <option onSelect={this.handleSelect} >FirstClass</option>
         <option onSelect={this.handleSelect} >Coach</option>
-      </Form.Control>
+        </Form.Control>
         </div>
     )
 }

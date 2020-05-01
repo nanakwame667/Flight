@@ -8,7 +8,7 @@ function Flight(){
       <div>
         <Nav className="mr-auto-active" variant="outline-tabs" expand="lg">
         <Nav.Item>
-          <Nav.Link to='/flight' className="txt2 hov1"> <img
+          <Nav.Link href='/flight' className="txt2 hov1"> <img
             src={require('../../Images/flight-icon.png')}
             width="30"
             height="25"

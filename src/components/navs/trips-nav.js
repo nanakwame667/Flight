@@ -1,5 +1,7 @@
 import React, {useContext} from 'react';
+
 import {Nav} from 'react-bootstrap';
+
 import AppContext from '../../config/app-context';
     
 
@@ -8,7 +10,7 @@ function Trips (){
     return(
         context.user && <Nav>
         <Nav.Item>
-        <Nav.Link href="/reservations">
+        <Nav.Link href="/reservations" className="txt2 hov1">
         <img
         src={require('../../Images/trip.png')}
         width="25"
