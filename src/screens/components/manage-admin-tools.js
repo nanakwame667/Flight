@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import AdminHome from './admin-home';
-import AdminViewReservations from './admin-view-reservations';
+import AdminShowCustomers from './admin-view-customers';
 import AdminAddReservation from './admin-add-reservation';
-import AdminReservationItem from './admin-reservation-item';
 
 import AppContext from '../../config/app-context';
 class AdminTools extends Component {
@@ -49,10 +48,10 @@ class AdminTools extends Component {
                         <div className="row">
                             <div className="col-12">
                                 {this.state.actiavateViewFor === 'home' && <AdminHome 
-                                    showSeeReservations={() => this.setState({actiavateViewFor: 'see-reservations'})}
+                                    showCustomers={() => this.setState({actiavateViewFor: 'show-customers'})}
                                     showAddReservation={() => this.setState({actiavateViewFor: 'add-reservation'})}/>}
                                 {this.state.actiavateViewFor === 'add-reservation' && <AdminAddReservation/>}
-                                {this.state.actiavateViewFor === 'see-reservations' && <AdminViewReservations/>}
+                                {this.state.actiavateViewFor === 'show-customers' && <AdminShowCustomers/>}
                             </div>
                         </div>
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReservationItem from './reservation-item';
-import AdminViewReservations from './admin-view-reservations';
+import CustomerItem from './reservation-item';
+import AdminViewReservations from './admin-view-customers';
 
 class ManageReservations extends Component {
 
@@ -38,12 +38,7 @@ class ManageReservations extends Component {
 
     searchForReservationByNameOrID(searhValue){
         return [
-            'Reservation 1',
-            'Reservation 2',
-            'Reservation 3',
-            'Reservation 4',
-            'Reservation 5',
-            'Reservation 6'
+            
         ];
     }
 
@@ -53,7 +48,7 @@ class ManageReservations extends Component {
             <div>
 
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"  onClick={() => this.setState({showViewFor: 'reservations'})}><a href="#">Reservations</a></li>
+                    <li className="breadcrumb-item"  onClick={() => this.setState({showViewFor: 'reservations'})}><a href="#">Search Customer</a></li>
                     <li className="breadcrumb-item active"  onClick={() => this.setState({showViewFor: 'add-reservation'})}>
                         <a href="#">New</a>
                     </li>
@@ -130,7 +125,7 @@ class ManageReservations extends Component {
                                                     <div className="row">  
                                                         <div classNAme="col-12">
                                                             { this.state.orders.map(item => {
-                                                                return <ReservationItem item={item}/>
+                                                                return <CustomerItem item={item}/>
                                                             })}
                                                         </div>
                                                     </div> 

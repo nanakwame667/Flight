@@ -6,7 +6,7 @@ class AdminSeeReservation extends Component {
         return (
             <div className="card">
             <div className="card-header">
-              Reservation Item
+              Customerr Item
             </div>
             <div className="card-body">
               <div id="accordion" role="tablist">
@@ -17,27 +17,27 @@ class AdminSeeReservation extends Component {
                     </h5>
                   </div>
                   <div className="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div className="card-body">Some name</div>
+                    <div className="card-body"> {this.props.item.firstname + " " + (this.props.item.lastname? this.props.item.lastname: '') + " " + (this.props.item.othername? this.props.item.othername: '')} </div>
                   </div>
                 </div>
                 <div className="card">
                   <div className="card-header" id="headingTwo" role="tab">
                     <h5 className="mb-0">
-                      <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Number in stock</a>
+                      <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Email</a>
                     </h5>
                   </div>
                   <div className="collapse show" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div className="card-body">13</div>
+                    <div className="card-body"> {this.props.item.email} </div>
                   </div>
                 </div>
                 <div className="card">
                   <div className="card-header" id="headingThree" role="tab">
                     <h5 className="mb-0">
-                      <a data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Unit price</a>
+                      <a data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Phone</a>
                     </h5>
                   </div>
                   <div className="collapse show" id="collapseThree" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div className="card-body">GHC 200</div>
+                    <div className="card-body">{this.props.item.phone}</div>
                   </div>
                 </div>
                 <div>

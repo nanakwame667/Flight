@@ -68,12 +68,8 @@ class FlightSearch extends Component {
       }
     }
 
- 
     console.log(this.dep_ret_date)
-
     console.log(this.dep_date)
-
-
     console.log(whereClause)
 
     let orderBy = this.state.orderBy;

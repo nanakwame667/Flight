@@ -20,11 +20,6 @@ const { BASE_API_URL } = require('../utils/constants');
 const axiosRestClient = require('axios-rest-client').default;
 const api = axiosRestClient({baseUrl: BASE_API_URL+"admin/"});
 
-// api.users.all()               // GET /users
-// api.users.find(1)             // Get /users/1
-// api.users.create(data)        // POST /users, body=data
-// api.users.update(1, data)     // PUT /users/1, body=data
-// api.users.delete(1)           // DELETE /users/1
 
 class LoginScreen extends Component {
 
@@ -37,6 +32,7 @@ class LoginScreen extends Component {
 
     attemptLogin(event, updateContext) {
         event.preventDefault();
+        this.setState({message: ''});
         console.log("attempting signin");
         let username = this.username.value;
         let password = this.password.value;

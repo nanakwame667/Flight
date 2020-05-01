@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReservationsListItem from './flights-list-item';
+import CustomersListItem from './flights-list-item';
 import AppContext from '../../config/app-context';
 
 const axiosRestClient = require('axios-rest-client').default;
@@ -55,7 +55,7 @@ class AdminViewReservations extends Component {
                     <div className="list-group">
                     {
                         this.state.data.map((item, i)=>{
-                            return <ReservationsListItem item={item} key={i}/>
+                            return <CustomersListItem item={item} key={i}/>
                         })
                     }
                     </div>

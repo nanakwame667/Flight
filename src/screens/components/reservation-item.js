@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import User from '../database/models/user';
 
-class ReservationItem extends Component {
+class CustomerItem extends Component {
 
     render(){
         return (
@@ -75,4 +75,4 @@ class ReservationItem extends Component {
 
 }
 
-export default ReservationItem;
+export default CustomerItem;

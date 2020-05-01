@@ -22,7 +22,7 @@ class AdminHome extends Component {
                             <p className="lead">
                                 <span className="btn btn-primary btn-lg mr-1" role="button" onClick={()=>{this.context.activateManager('reservation')}}>Manage Reservations</span>
                                 <span className="btn btn-success btn-lg mr-1" role="button" onClick={()=>{this.context.activateManager('flight')}}>Manage Flights</span>
-                                <span className="btn btn-secondary btn-lg mr-1" role="button" onClick={()=>{this.props.showSeeReservations()}}>Manage Customers</span>
+                                <span className="btn btn-secondary btn-lg mr-1" role="button" onClick={()=>{this.props.showCustomers()}}>Manage Customers</span>
                             </p>
                         </div>
                     </div>

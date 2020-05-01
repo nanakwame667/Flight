@@ -29,6 +29,7 @@ class SignupScreen extends Component {
 
     attemptSignup(event){
         event.preventDefault();
+        this.setState({message: ''});
 
         if (this.fullname.value.trim() === ''){
             this.setState({registerFailed: true, message: 'fullname field is empty!'});
