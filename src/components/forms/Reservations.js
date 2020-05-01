@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Table, Container, Card, Button } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -7,19 +8,21 @@ import NavBar from './home/NavBar';
 import FlightClass from './flight-class-picker';
 import AppContext from '../../config/app-context';
 import { Redirect } from 'react-router-dom';
+import Footer from './../../components/forms/home/footer';
+
 const axiosRestClient = require('axios-rest-client').default;
 const { BASE_API_URL } = require('../../utils/constants');
+const { formatDate } = require('../../utils/functions');
 const { SearchBar } = Search;
 
 export default class Reservations extends Component {
 
     static contextType = AppContext;
-    state = { data: [] };
+    
+    state = { reservations: [] };
 
-    columns = [{
-        dataField: 'id',
-        text: 'Flight ID'
-        }, {
+    columns = [
+        {
             dataField: 'flightType',
             text: 'Flight Type'
         }, {
@@ -49,15 +52,13 @@ export default class Reservations extends Component {
         },
     ];
 
-    constructor(props, context) {
+    constructor(props, context){
         super(props, context);
-        if (this.context.token && this.context.user) {
-            // this.listReservations();
-        }
+        this.listReservations();
     }
-
+  
     listReservations = () => {
-
+        
         const api = axiosRestClient({
             baseUrl: BASE_API_URL,
             headers: {
@@ -82,26 +83,39 @@ export default class Reservations extends Component {
                 })
             }
         }
-
+        
         api.reservation.all().then(({ data }) => {
-            console.log(data)
             if (data.status === 'success') {
-                let reservations = data.result.data.map((item) => {
-                    return {
-                        id: item.id,
-                        flightType: item.flightType,
-                        flightClass: <FlightClass value={item.travelClass} />,
-                        depCity: item.departureCity,
-                        destination: item.destinationCity,
-                        depDate: item.departureDate,
-                        arryDate: item.arrivalDate,
-                        passengers: <Counter value={item.numberOfPersons} />,
-                        pay: <Button variant="outline-primary">Pay</Button>,
-                        remove: <Button variant="outline-danger" onClick={() => { removeReservation(item.id); }}>Remove</Button>
+                let reservations = [];
+                data.result.data.map(async (item, i) => {
+                    const api = axiosRestClient({
+                        baseUrl: BASE_API_URL + 'flight/'
+                    });
+                    try{
+                        let flight = await api.query.create({ where: {id :item.flightID}});
+                        flight = flight.data.result.data;
+                        if (flight.length > 0){
+                            flight = flight[0];
+                            reservations.push({
+                                id: item.id,
+                                flightType: flight.flightType,
+                                flightClass: <FlightClass value={item.travelClass} />,
+                                depCity: flight.departureCity,
+                                destination: flight.destinationCity,
+                                depDate: formatDate('dd/mm/yy HH:MM', flight.departureDate),
+                                arryDate: formatDate('dd/mm/yy HH:MM', flight.arrivalDate),
+                                passengers: <Counter value={item.numberOfPersons} />,
+                                pay: <Button variant="outline-primary">Pay</Button>,
+                                remove: <Button variant="outline-danger" onClick={() => { removeReservation(item.id); }}>Remove</Button>
+                            });
+                        }
+                    }catch(err){
+                        console.log(err)
+                    };
+                    if (i+1 === data.result.data.length){
+                        this.setState({reservations: reservations});
                     }
                 });
-                console.log(reservations);
-                this.setState({ data: reservations });
             }
         }).catch(err => {
             console.log(err);
@@ -113,7 +127,6 @@ export default class Reservations extends Component {
     // Implement startWith instead of contain
     customMatchFunc({ searchText, value, column, row }) {
         if (typeof value !== 'undefined') {
-            console.log(value);
             return value.toLowerCase().startWith(searchText.trim().toLowerCase());
         }
         return false;
@@ -122,6 +135,7 @@ export default class Reservations extends Component {
 
     render() {
         return (!(this.context.user && this.context.token) ? <Redirect to='/' /> :
+          
             <Container style={{ 'max-width': '100%' }} >
                 <NavBar /><br /><br />
                 <Container style={{ backgroundColor: '#F0FFF0', marginTop: '12px' }} fluid>
@@ -138,7 +152,7 @@ export default class Reservations extends Component {
                         <Card.Body>
                             <ToolkitProvider
                                 keyField="id"
-                                data={this.state.data}
+                                data={this.state.reservations}
                                 columns={this.columns}
                                 search={this.customMatchFunc}
                             >
@@ -160,10 +174,11 @@ export default class Reservations extends Component {
                                     )
                                 }
                             </ToolkitProvider>
-                        </Card.Body>
+                        </Card.Body> 
                     </Card>
                 </Container>
-            </Container>
+               
+            </Container> 
         )
     }
 }

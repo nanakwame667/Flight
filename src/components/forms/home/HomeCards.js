@@ -8,12 +8,13 @@ function HomeCards (){
       <Container fluid="true">
         <CardDeck style={{width:'80%',marginLeft:'160px', alignContent:'center'}}>
         <Card style={{height:'70%',borderRadius:'15px'}} className="bg-white rounded">
-
-          <Card.Img variant="top" src={require('../../../Images/people.jpg')} style={{height:'200px'}}/>
+          
+          <Card.Img variant="top" src={require('../../../Images/people.jpg')} style={{height:'200px',transition:"1s"}}className="hover"/>
+          
           <Card.Body>
             <small className="text-muted">Last updated 3 mins ago</small>
             <Card.Text>
-              This is a wider card with supporting text
+              Travel and have an encounter 
             </Card.Text>
           </Card.Body>
         </Card>
@@ -22,7 +23,7 @@ function HomeCards (){
         <Card.Body>
           <small className="text-muted">Last updated 3 mins ago</small>
           <Card.Text>
-            This is a wider card with supporting text
+            Have a stand tour to the finest sites
           </Card.Text>
         </Card.Body>
       </Card>
@@ -31,7 +32,7 @@ function HomeCards (){
       <Card.Body>
         <small className="text-muted">Last updated 3 mins ago</small>
         <Card.Text>
-          This is a wider card with supporting text
+          Enjoy some time with family
         </Card.Text>
       </Card.Body>
     </Card>
@@ -40,7 +41,7 @@ function HomeCards (){
           <Card.Body>
             <small className="text-muted">Last updated 3 mins ago</small>
             <Card.Text>
-              This is a wider card with supporting text
+              Discover more with Flight-Booky
             </Card.Text>
           </Card.Body>
         </Card>
