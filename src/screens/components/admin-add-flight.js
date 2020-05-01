@@ -7,10 +7,12 @@ const axiosRestClient = require('axios-rest-client').default;
 
 class AdminAddReservation extends Component {
 
-    state = {};
+    state = { flight_type: 'one-way' }
     static contextType = AppContext;
 
     submitForm = () => {
+
+        this.setState({message: ''});
 
         if (this.dep_city.value.trim() === ''){
             this.setState({submitFailed: true, message: 'require departure city!.'});
@@ -30,6 +32,9 @@ class AdminAddReservation extends Component {
         else if (this.flight_type.value.trim() === ''){
             this.setState({submitFailed: true, message: 'require flight type!.'});
         }
+        else if (this.flight_type.value === 'round-trip' && (this.ret_date.value.trim() === '' || this.ret_time.value.trim() === '')){
+            this.setState({submitFailed: true, message: 'require return date and time!.'});
+        }
         else if (!this.num_passengers.value){
             this.setState({submitFailed: true, message: 'require number of expected passengers!.'});
         }
@@ -38,7 +43,7 @@ class AdminAddReservation extends Component {
         }
         else{
 
-            let token = this.context.token;       
+            let token = this.context.token;
 
             const api = axiosRestClient({baseUrl: BASE_API_URL, headers:{
                 auth_token: token
@@ -48,21 +53,28 @@ class AdminAddReservation extends Component {
             let arrCity = this.arr_city.value.trim();
             let depDate = this.buildDateTime(this.dep_date.value, this.dep_time.value);
             let arrDate = this.buildDateTime(this.arr_date.value, this.arr_time.value);
-            let fType = this.flight_type.value.toLowerCase().replace(' ', '-');
+            let fType = this.flight_type.value;
             let numPass = this.num_passengers.value;
             let fPrice = this.price.value;
             let fPlaneID = this.plane_id.value;
+            let retDate  = '';
+
+            if (this.flight_type.value === 'round-trip'){
+                retDate = this.buildDateTime(this.ret_date.value, this.ret_time.value);
+            }
 
             api.flight.create({
                 departureCity: depCity,
                 destinationCity: arrCity,
                 departureDate: depDate,
                 arrivalDate: arrDate,
+                returnDate: retDate,
                 flightType: fType,
                 totalNumberOfPersons: numPass,
                 price: fPrice,
                 planeID: fPlaneID
             }).then(({data})=>{
+                console.log(data)
                 if (data.status === 'success'){
                     this.setState({submitFailed: false, message: 'you successfully added flight.'});
                 }
@@ -91,8 +103,10 @@ class AdminAddReservation extends Component {
         this.arr_city.value = '';
         this.dep_date.value = formatDate('YYYY-mm-dd', Date.now());
         this.arr_date.value = formatDate('YYYY-mm-dd', Date.now());
+        this.ret_date.value = formatDate('YYYY-mm-dd', Date.now());
         this.dep_time.value = '00:00:00';
         this.arr_time.value = '00:00:00';
+        this.ret_time.value = '00:00:00';
         this.num_passengers.value = 100;
         this.price.value = 250;
         this.plane_id.value = '';
@@ -159,13 +173,31 @@ class AdminAddReservation extends Component {
                     <div className="form-group row">
                         <label className="col-md-3 col-form-label" htmlFor="hf-flight-type">Flight Type</label>
                         <div className="col-md-9">
-                        <select ref={view => this.flight_type = view} className="form-control" id="hf-flight-type" type="text" defaultValue="one-way" name="hf-flight-type" placeholder="Choose flight type..">
-                            <option defaultValue='one-way'>One Way</option>
-                            <option defaultValue='round-trip'>Round Trip</option>
+                        <select ref={view => this.flight_type = view} onChange={(event)=>{ this.setState({flight_type: event.target.value}) }} value={this.state.flight_type}  className="form-control" id="hf-flight-type" type="text" defaultValue="one-way" name="hf-flight-type" placeholder="Choose flight type..">
+                            <option value='one-way'>One Way</option>
+                            <option value='round-trip'>Round Trip</option>
                         </select>
                         <span className="help-block">What type of flight will this be?</span>
                         </div>
                     </div>
+                    { this.state.flight_type === 'round-trip' &&
+                    <div>
+                        <div className="form-group row">
+                            <label className="col-md-3 col-form-label" htmlFor="hf-return-date">Return Date</label>
+                            <div className="col-md-9">
+                            <input ref={view => this.ret_date = view} min={formatDate('YYYY-mm-dd', Date.now())} defaultValue={formatDate('YYYY-mm-dd', Date.now())}  className="form-control" id="hf-return-date" type="date" name="hf-return-date" placeholder="Enter return date.."/>
+                            <span className="help-block">Please enter the return date</span>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label className="col-md-3 col-form-label" htmlFor="hf-return-time">Return Time</label>
+                            <div className="col-md-9">
+                            <input ref={view => this.ret_time = view} className="form-control" id="hf-return-time" type="time" defaultValue="00:00:00" name="hf-return-time" placeholder="Enter return time.."/>
+                            <span className="help-block">Please enter the return time</span>
+                            </div>
+                        </div>
+                    </div>
+                    }
                     <div className="form-group row">
                         <label className="col-md-3 col-form-label" htmlFor="hf-price">Price</label>
                         <div className="col-md-9">

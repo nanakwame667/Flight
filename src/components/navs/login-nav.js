@@ -10,6 +10,8 @@ function Login (props){
     let context = useContext(AppContext);
     const [isShow, setShowModal] = useState(false);
 
+    if (!context.showAuthModal) context.updateState({ showAuthModal: setShowModal});
+
     return(
       <div  style={{marginRight: '100px'}}>
         <Nav>

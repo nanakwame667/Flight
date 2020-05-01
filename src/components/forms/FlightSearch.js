@@ -1,4 +1,4 @@
-import React, * as react from 'react';
+import React, {Component} from 'react';
 import {
   Alert,
   Button,
@@ -16,72 +16,82 @@ import AppContext from '../../config/app-context';
 
 const axiosRestClient = require('axios-rest-client').default;
 const { BASE_API_URL } = require('../../utils/constants');
+const api = axiosRestClient({
+  baseUrl: BASE_API_URL + 'flight/'
+});
 
-
-class FlightSearch extends react.Component {
-
-  state = { data: [] }
-  static contextType = AppContext;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      person: 'adult',
-      flightClass: 'economy',
-      sortBy: 'best',
-      tripType: 'one-way',
-    }
-  }
+class FlightSearch extends Component {
 
   
-  displayFlights = async () => {
+  static contextType = AppContext;
 
-    let token = this.context.token;
-    let key = this.props.search;
-    let whereClause = {};
+  state = {
+    person: 'adult',
+    flightClass: 'economy',
+    sortBy: 'price',
+    tripType: 'one-way',
+    all: true,
+    data: [] 
+  }
 
-    if (key){
-        whereClause = {
-            $or : [
-                {
-                    departureCity: {
-                        $like : '%'+key+'%'
-                    }
-                },
-                {   destinationCity: {
-                        $like : '%'+key+'%'
-                    }
-                },
-                {   flightType: {
-                        $like : '%'+key+'%'
-                    }
-                },
-                {   price: {
-                        $like : '%'+key+'%'
-                    }
-                } 
-            ]
-        }
+  constructor(props, context){
+    super(props, context);
+    this.displayFlights();
+  }
+
+  displayFlights = () => {
+
+    let whereClause = {
+      departureDate: {
+        $gt: new Date()
+      }
+    };
+
+    console.log(this.state)
+
+    if (this.state.all) {
+      this.setState({ all: false });
+    }
+    else {
+      if (this.state.tripType) {
+        whereClause.flightType = this.state.tripType;
+      }
+      if (this.from.value.trim()) {
+        whereClause.departureCity = {
+          $like: `%${this.from.value.trim().toLowerCase()}%`
+        };
+      }
+      if (this.to.value.trim()) {
+        whereClause.destinationCity = {
+          $like: `%${this.to.value.trim().toLowerCase()}%`
+        };
+      }
     }
 
-    console.log(key, whereClause)
+ 
+    console.log(this.dep_ret_date)
 
-    const api = axiosRestClient({
-      baseUrl: BASE_API_URL + 'flight/',
-      headers: {
-        auth_token: token
-      }
-    });
+    console.log(this.dep_date)
+
+
+    console.log(whereClause)
+
+    let orderBy = this.state.orderBy;
+    if (orderBy === 'departure-city') orderBy = 'departureCity';
+    if (orderBy === 'arrival-city') orderBy = 'destinationCity';
+    if (orderBy === 'departure-date') orderBy = 'departureDate';
+    if (orderBy === 'arrival-date') orderBy = 'arrivalDate';
+
 
     api.query.create({
-      where: whereClause
+      where: whereClause,
+      order: orderBy
     }).then(({ data }) => {
-      this.setState({ data: data.result.data });
+      console.log(data)
+      if (data.status === 'success') this.setState({ data: data.result.data });
     }).catch(err => {
       console.log(err);
     });
-
 
   }
 
@@ -97,8 +107,8 @@ class FlightSearch extends react.Component {
             <Col style={{ padding: '20px' }}>
               <Nav className="d-flex flex-row justify-content-center">
               <NavDropdown className="d-inline-flex"  style={{ fontSize: '130%' }} title={this.state.tripType} id="collasible-nav-dropdown">
-                <NavDropdown.Item value="round-trip" eventKey={'round-trip'} onSelect={(event) => this.setState({ tripType: event })}>Round Trip</NavDropdown.Item>
-                <NavDropdown.Item value="one-way" eventKey={'one-way'} onSelect={(event) => this.setState({ tripType: event })}>One Way</NavDropdown.Item>
+                <NavDropdown.Item value="round-trip" eventKey={'round-trip'} onSelect={(event) => { this.setState({ tripType: event }); this.displayFlights();}}>Round Trip</NavDropdown.Item>
+                <NavDropdown.Item value="one-way" eventKey={'one-way'} onSelect={(event) => { this.setState({ tripType: event }); this.displayFlights();}}>One Way</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown  className="d-inline-flex" value={this.state.adults} min={1} max={15} data-val="left" id="collasible-nav-dropdown" title={this.state.person}>
                 <NavDropdown.Item eventKey={'adult'} onSelect={(event) => this.setState({ person: event })}>Adult</NavDropdown.Item>
@@ -133,6 +143,7 @@ class FlightSearch extends react.Component {
 
                         <InputGroup>
                           <Form.Control
+                            ref={ view => this.from = view }
                             style={{ width: '221px', height: '67px', marginRight: '5px', borderRadius: '7px' }}
                             type="text"
                             placeholder="From?"
@@ -144,12 +155,14 @@ class FlightSearch extends react.Component {
                             height="15px"
                           /></Button>
                           <Form.Control
+                            ref={ view => this.to = view }
                             style={{ width: '221px', height: '67px', marginRight: '10px', marginLeft: '20px', borderRadius: '7px' }}
                             type="text"
                             placeholder="To?"
                           />
                           <div style={{ width: '35rem' }}>
                             <RangeDatePicker
+                              ref={ view => this.dep_ret_date = view } 
                               style={{ width: '15rem' }}
                               startDate={new Date()} />
                           </div>
@@ -164,6 +177,7 @@ class FlightSearch extends react.Component {
                       <Form.Group as={Col}>
                         <InputGroup>
                           <Form.Control
+                            ref={ view => this.from = view }
                             style={{ width: '221px', height: '67px', marginRight: '12px', borderRadius: '7px' }}
                             type="text"
                             placeholder="From?"
@@ -176,12 +190,13 @@ class FlightSearch extends react.Component {
 
                           /></Button>
                           <Form.Control
+                            ref={ view => this.to = view }
                             style={{ width: '221px', height: '67px', marginRight: '5px', marginLeft: '20px', borderRadius: '7px' }}
                             type="text"
                             placeholder="To?"
                           />
                           <div style={{ width: '29rem', height: '2rem', marginLeft: '5px' }}>
-                            <SingleDatePicker startDate={new Date()} />
+                            <SingleDatePicker  ref={ view => this.dep_date = view } startDate={new Date()} />
                           </div>
                         </InputGroup>
                       </Form.Group>
@@ -189,7 +204,7 @@ class FlightSearch extends react.Component {
                   </Form>
                 }
               </Navbar>
-              <Button className="d-inline-flex" variant="primary" 
+              <Button onClick={()=>{this.displayFlights()}} className="d-inline-flex" variant="primary" 
                   style={{
                     paddingLeft: '32px', paddingRight: '32px',
                     paddingTop: '16px', paddingBottom: '16px',
@@ -197,7 +212,7 @@ class FlightSearch extends react.Component {
                     borderRadius: '350px', textAlign: 'center'
                   }}>
                   Search
-                  </Button>
+              </Button>
             </div>
            </Col>
           </Row>
@@ -219,11 +234,11 @@ class FlightSearch extends react.Component {
              <div className="d-flex flex-row justify-content-end align-items-center">
                   <p className="d-inline-flex mr-2">Sort By</p>
                   <DropdownButton className="d-inline-flex" size='md' title={this.state.sortBy} variant='outline-primary'>
-                    <Dropdown.Item eventKey={'price'} onSelect={(event) => this.setState({ sortBy: event })}>Price</Dropdown.Item>
-                    <Dropdown.Item eventKey={'departure-time'} onSelect={(event) => this.setState({ sortBy: event })}>Departure Time</Dropdown.Item>
-                    <Dropdown.Item eventKey={'arrival-time'} onSelect={(event) => this.setState({ sortBy: event })}>Arrival Time</Dropdown.Item>
-                    <Dropdown.Item eventKey={'departure-city'} onSelect={(event) => this.setState({ sortBy: event })}>Departure City</Dropdown.Item>
-                    <Dropdown.Item eventKey={'destination-city'} onSelect={(event) => this.setState({ sortBy: event })}>Arrival City</Dropdown.Item>
+                    <Dropdown.Item eventKey={'price'} onSelect={(event) => { this.setState({ sortBy: event }); this.displayFlights(); }}>Price</Dropdown.Item>
+                    <Dropdown.Item eventKey={'departure-date'} onSelect={(event) => { this.setState({ sortBy: event }); this.displayFlights(); }}>Departure Time</Dropdown.Item>
+                    <Dropdown.Item eventKey={'arrival-date'} onSelect={(event) => { this.setState({ sortBy: event }); this.displayFlights(); }}>Arrival Time</Dropdown.Item>
+                    <Dropdown.Item eventKey={'departure-city'} onSelect={(event) => { this.setState({ sortBy: event }); this.displayFlights(); }}>Departure City</Dropdown.Item>
+                    <Dropdown.Item eventKey={'destination-city'} onSelect={(event) => { this.setState({ sortBy: event }); this.displayFlights(); }}>Arrival City</Dropdown.Item>
                   </DropdownButton>
               </div>
             </Col>
@@ -293,11 +308,16 @@ class FlightSearch extends react.Component {
             <Col xs={12} sm={12} md={8} lg={9}>
 
               <div>
-                <Card style={{ borderWidth: '2px', borderRadius: '10px', borderColor: '#20B2AA' }}>
+              { this.state.data.map((item, i)=>{
+                item.travelClass = this.state.flightClass;
+                item.personType = this.state.person;
+                return <Card key={i} style={{ borderWidth: '2px', borderRadius: '10px', borderColor: '#20B2AA' }}>
                   <Card.Body>
-                    <FlightItem item={{departureDate: new Date(), arrivalDate: new Date()}}/>
+                    <FlightItem item={item}/>
                   </Card.Body>
                 </Card>
+              }) 
+              }
               </div>
 
               <CardGroup>

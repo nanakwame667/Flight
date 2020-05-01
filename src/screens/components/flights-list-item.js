@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import AppContext from '../../config/app-context';
 import { formatDate } from '../../utils/functions';
 
+const { BASE_API_URL } = require('../../utils/constants');
+const axiosRestClient = require('axios-rest-client').default;
 class FlightsListItem extends Component {
 
+    state = {};
+    static contextType = AppContext;
 
     render(){
-        return ( 
-            <div className="list-group-item list-group-item-action flex-column align-items-start">
+        return (this.state.deleted ? <div/> :
+          <div className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex w-100 justify-content-between">
                     <h5 className="mb-1">Flight {this.props.item.id}</h5>
                     <small>3 days ago</small>
@@ -35,7 +40,7 @@ class FlightsListItem extends Component {
                                     <div className="form-group">
                                     <div className="input-group">
                                         <div className="input-group-prepend">
-                                        <span className="input-group-text">Departure Date</span>
+                                        <span className="input-group-text">Dep. Date</span>
                                         </div>
                                         <span className="form-control">{formatDate("dd/mm/yy HH:MM" ,this.props.item.departureDate)}</span> 
                                         <div className="input-group-append">
@@ -86,7 +91,7 @@ class FlightsListItem extends Component {
                                     <div className="form-group">
                                     <div className="input-group">
                                         <div className="input-group-prepend">
-                                        <span className="input-group-text">Arrival Date</span>
+                                        <span className="input-group-text">Arr. Date</span>
                                         </div>
                                         <span className="form-control">{formatDate("dd/mm/yy HH:MM" ,this.props.item.arrivalDate)}</span> 
                                         <div className="input-group-append">
@@ -160,10 +165,30 @@ class FlightsListItem extends Component {
                         <button className="btn btn-block btn-outline-dark" type="button">Edit</button>
                     </div>
                     <div className="col-6">
-                        <button className="btn btn-block btn-outline-danger" type="button">Remove</button>
+                        <button className="btn btn-block btn-outline-danger" type="button" onClick={ ()=> {
+                            if (window.confirm('Are you sure you want to delete this?')){
+                                
+                                let token = this.context.token;
+
+                                const api = axiosRestClient({baseUrl: BASE_API_URL, headers:{
+                                    auth_token: token
+                                }});
+
+                                api.flight.delete(this.props.item.id).then(({data})=>{
+                                    console.log(data);
+                                    if (data.status === 'success') {alert('deletion sucessful');  this.setState({deleted: true}); }
+                                    else alert('deletion failed');
+                                }).then(err=>{
+                                    console.log(err);
+                                    alert('could not delete. something went wrong!');
+                                })
+                            }
+
+                        }}> Remove</button>
                     </div>
                 </div>
             </div> 
+            
         ) 
     }
 

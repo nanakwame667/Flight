@@ -15,16 +15,16 @@ function UserForm (props){
     const [fullname, setFullname] = useState('');
     const [phone, setPhone] = useState('');
     const [errorMessage, setError] = useState('');
-    const [validated, setValidated] = useState(false);
+    const [isValid, setValidated] = useState(false);
     const [isLogin,isShowLogin] = useState(true);
     const [isSignup,isShowSignup]= useState(false);
     
-    const showSignupModal=(event)=>{
+    const showSignupModal=()=>{
       setError('');
       isShowLogin(false);
       isShowSignup(true);
     }
-    const showLoginModal=(event)=>{
+    const showLoginModal=()=>{
       setError('');
       isShowSignup(false);
       isShowLogin(true);
@@ -33,29 +33,29 @@ function UserForm (props){
       const form = event.currentTarget;
       event.preventDefault();
       if (form.checkValidity() === false) {
+        // setValidated(false);
+        event.preventDefault();
         event.stopPropagation();
       }
       else{
-        if (isLogin){
+        //  setValidated(true);
+         if (isLogin){
           const api = axiosRestClient({baseUrl: BASE_API_URL+'user/'});
           api.auth.create({
             email: email.trim(),
             password: password.trim()
           }).then(({data})=>{
             if (data.status === 'success'){
-              setValidated(false);
               context.updateState({user: data.result.data.user, token: data.result.data.token});
               props.showModal(false);
               console.log(context);
             }
             else{
               console.log(data.result); 
-              setValidated(false);
               setError(data.result.message);
             }
           }).catch(err=>{
             console.log(err);
-            setValidated(false);
           });
         }
         else{
@@ -70,17 +70,14 @@ function UserForm (props){
             othername: names.length > 2 ? names.slice(2).join(' ') :  ''
           }).then(({data})=>{
             if (data.status === 'success'){
-              setValidated(true);
-              showSignupModal();
+              showLoginModal();
             }
             else{
               console.log(data.result);
-              setValidated(false);
               setError(data.result.error.errors[0].message);
             }
           }).catch(err=>{
             console.log(err);
-            setValidated(false);
           });
         }
 
@@ -102,11 +99,13 @@ function UserForm (props){
                 <h3 style={{fontSize:'30px'}}>Hey!! Good to see you again</h3>
                 <p style={{fontSize:'15px'}}>Sign in for member-only deals and access to your Trip <br/> details.</p>
                 
-                <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'10px'}}>
+                <Form variant="primary" noValidate validated={isValid} onSubmit={handleSubmit} style={{marginTop:'10px'}}>
                   <Form.Group controlId="formBasicEmail">
                 
                     <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
-                    <Form.Control value={email}  onChange={ (e)=>{ setEmail(e.target.value) } } required type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
+                    <Form.Control value={email}  onChange={ (e)=>{ setEmail(e.target.value) } } 
+                    required feedback="please enter an email address"
+                    type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
                     <Form.Text className="text-muted">
                       Example: example@example.com  
                     </Form.Text>
@@ -174,14 +173,15 @@ function UserForm (props){
          
           <Container style={{width:'500px',height:'max-content'}} fluid="true">
            { errorMessage && <p className="lead text-danger text-center">{errorMessage}</p> }
-            <Form variant="primary" noValidate validated={validated} onSubmit={handleSubmit}style={{marginTop:'30px'}}>
+            <Form variant="primary" noValidate validated={isValid} onSubmit={handleSubmit}style={{marginTop:'30px'}}>
 
             <h3 style={{marginTop:'30px',fontSize:'30px'}}>Sign Up and Save</h3>
             <p style={{fontSize:'15px'}}>Create an account now for access to member-only deals.</p>
             
             <Form.Group controlId="formBasicFullname">
               <Form.Label style={{fontSize:"20px"}}>Fullname</Form.Label>
-              <Form.Control required value={fullname}  onChange={ (e)=>{ setFullname(e.target.value) } } placeholder="Fullname" style={{width:'400px'}} size="lg"/>
+              <Form.Control required
+              value={fullname}  onChange={ (e)=>{ setFullname(e.target.value) } } placeholder="Fullname" style={{width:'400px'}} size="lg"/>
               <Form.Text className="text-muted">
                 Format: firstname lastname other-names
               </Form.Text>
@@ -192,7 +192,9 @@ function UserForm (props){
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label style={{fontSize:"20px"}}>Email</Form.Label>
-              <Form.Control value={email}  onChange={ (e)=>{ setEmail(e.target.value) } } required type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
+              <Form.Control value={email}  onChange={ (e)=>{ setEmail(e.target.value) } } 
+              required feedback="please enter an email address"
+              type="email" placeholder="Enter email" style={{width:'400px'}} size="lg" />
               <Form.Text className="text-muted">
                 Example: example@example.com
               </Form.Text>
@@ -203,9 +205,10 @@ function UserForm (props){
             
             <Form.Group controlId="formBasicPhone">
               <Form.Label style={{fontSize:"20px"}}>Phone</Form.Label>
-              <Form.Control  value={phone}  onChange={ (e)=>{ setPhone(e.target.value) } } placeholder="Phone" style={{width:'400px'}} size="lg"/>
+              <Form.Control  value={phone} required feedback="please enter your phone number" type="phone"
+              onChange={ (e)=>{ setPhone(e.target.value) } } placeholder="Phone" style={{width:'400px'}} size="lg"/>
               <Form.Text className="text-muted">
-                Example: 0240000000 (optional)
+                Example: 0240000000
               </Form.Text>
               <Form.Control.Feedback type="invalid">
                 Please enter a correct phone number
@@ -215,7 +218,7 @@ function UserForm (props){
           
             <Form.Group controlId="formBasicPassword">
               <Form.Label style={{fontSize:"20px"}}>Password</Form.Label>
-              <Form.Control required min="8" value={password}  onChange={ (e)=>{ setPassword(e.target.value) } } placeholder="Password" style={{width:'400px'}} size="lg"/>
+              <Form.Control required feedback="please enter a password" min="8" value={password}  onChange={ (e)=>{ setPassword(e.target.value) } } placeholder="Password" style={{width:'400px'}} size="lg"/>
               <Form.Control.Feedback type="invalid">
                 Please enter a correct password
               </Form.Control.Feedback>

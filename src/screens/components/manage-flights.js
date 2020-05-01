@@ -32,7 +32,9 @@ class ManageFlight extends Component {
                                             }}>
                                             <i className="fa fa-search"></i> Search</button>
                                         </span>
-                                        <input className="form-control" ref={view => this.search_flight = view}  id="input1-group2" type="text" name="input1-group2" placeholder="id, type, ... destination, departure"/>
+                                        <input className="form-control" ref={view => this.search_flight = view} onChange={(event)=>{ 
+                                                  this.setState({showViewFor: 'flights', search: event.target.value.trim()});
+                                         }} id="input1-group2" type="text" name="input1-group2" placeholder="id, type, ... destination, departure"/>
                                     </div>
                                 </div>
                             </div>
@@ -47,8 +49,7 @@ class ManageFlight extends Component {
 
                         <div className="row">
                             <div className="col-12">
-                                {this.state.showViewFor === 'add-flight' && <AdminAddFlight/>}
-                                {this.state.showViewFor === 'flights' && <AdminViewFlights search={this.state.search}/>}
+                                {this.state.showViewFor === 'flights' ? <AdminViewFlights search={this.state.search}/> : <AdminAddFlight/>}
                             </div>
 
                         </div>

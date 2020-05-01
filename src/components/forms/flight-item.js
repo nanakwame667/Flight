@@ -1,8 +1,47 @@
 import React, { Component } from 'react';
 import { formatDate } from '../../utils/functions';
+import AppContext from '../../config/app-context';
+
+const { BASE_API_URL } = require('../../utils/constants');
+const axiosRestClient = require('axios-rest-client').default;
 
 class FlightsListItem extends Component {
+    
+    static contextType = AppContext;
 
+    makeReservation = ()=>{
+
+        if (this.context.token && this.context.user && window.confirm(" do you wish to proceed with resevations?")){
+            
+            let token = this.context.token;
+            let fid = this.props.item.id;
+            let tClass = this.props.item.travelClass;
+
+            const api = axiosRestClient({baseUrl: BASE_API_URL, headers:{
+                auth_token: token
+            }});
+
+            api.reservation.create({
+                flightID: fid,
+                travelClass: tClass,
+                numberOfPersons: 1
+            }).then(({data})=>{
+                console.log(data);
+                if (data.status === 'success'){
+                    alert('reservation made successfully.');
+                }else{
+                    alert('we were unable to make this reservation!. sorry.');
+                }
+            }).catch(err=>{
+                console.log(err);
+                alert('something went wrong. we were unable to make this reservation!. sorry.');
+            })
+        }
+        else{
+            alert('please login to make reservations');
+            this.context.showAuthModal(true);
+        }
+    }
 
     render() {
         return (
@@ -146,7 +185,7 @@ class FlightsListItem extends Component {
                                     </div>
                                     <div className="form-group">
                                         <div className="input-group">
-                                            <button className="btn btn-block btn-outline-dark" style={{ width: '100%' }} type="button">Reserve</button>
+                                            <button onClick={()=>{ this.makeReservation() }} className="btn btn-block btn-outline-dark" style={{ width: '100%' }} type="button">Reserve</button>
 
                                         </div>
                                     </div>
