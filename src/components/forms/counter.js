@@ -5,8 +5,8 @@ import { Button, Row, Col } from 'react-bootstrap';
 
 export default function Counter(props) {
     
-    const [count, setCount] = useState(1);
-    setCount(props.value);
+    const [count, setCount] = useState(props.value);
+   
 
     return (
         <div>
@@ -25,7 +25,7 @@ export default function Counter(props) {
                     </Button>
                 </Col>
                 <Col style={{ alignSelf: 'center', fontSize: '18px' }}>
-                    {count}
+                    <p>{count}</p>
                 </Col>
                 <Col>
                     <Button onClick={() => setCount(count + 1)} variant='outline-primary' size="sm"

@@ -51,7 +51,7 @@ function UserForm (props){
               console.log(context);
             }
             else{
-              console.log(data.result); 
+              console.log(data.result.error); 
               setError(data.result.message);
             }
           }).catch(err=>{
@@ -73,7 +73,7 @@ function UserForm (props){
               showLoginModal();
             }
             else{
-              console.log(data.result);
+              console.log(data.result.error);
               setError(data.result.error.errors[0].message);
             }
           }).catch(err=>{

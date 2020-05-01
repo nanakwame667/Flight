@@ -26,11 +26,10 @@ class FlightsListItem extends Component {
                 travelClass: tClass,
                 numberOfPersons: 1
             }).then(({data})=>{
-                console.log(data);
                 if (data.status === 'success'){
                     alert('reservation made successfully.');
                 }else{
-                    alert('we were unable to make this reservation!. sorry.');
+                    alert(data.result.message);
                 }
             }).catch(err=>{
                 console.log(err);
