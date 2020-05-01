@@ -9,6 +9,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Counter from './counter';
 
 import NavBar from './home/NavBar';
+import FlightClass from './home/flightClass';
 
 export default function Reservations (){
     const {SearchBar}=Search;
@@ -27,6 +28,7 @@ function customMatchFunc({
     const products=[{
         id:0,
         flightType:'Round-trip',
+        flightClass:<FlightClass/>,
         depCity:'Accra',
         destination:'Kumasi',
         depDate:'26/05/20',
@@ -37,6 +39,7 @@ function customMatchFunc({
     },{
         id:1,
         flightType:'One-way',
+        flightClass:<FlightClass/>,
         depCity:'Takoradi',
         destination:'Kumasi',
         depDate:'26/05/20',
@@ -47,6 +50,7 @@ function customMatchFunc({
     },{
         id:2,
         flightType:'Round-trip',
+        flightClass:<FlightClass/>,
         depCity:'Akuapem',
         destination:'Sekondi',
         depDate:'26/05/20',
@@ -63,7 +67,10 @@ function customMatchFunc({
         }, {
         dataField: 'flightType',
         text: 'Flight Type'
-        }, {
+        },{
+            dataField:'flightClass',
+            text:'Flight Class'
+        },{
         dataField: 'depCity',
         text: 'Departure City'
         }, {

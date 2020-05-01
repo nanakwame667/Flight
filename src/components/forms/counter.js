@@ -13,7 +13,9 @@ export default function Counter(){
         <p style={{fontSize:'16px'}}>Adult</p>
         </Col>
         <Col>
-        <Button onClick={()=>setCount(count-1)} variant='outline-primary'>
+        <Button onClick={()=>setCount(count-1)} variant='outline-primary' size="sm"
+        style={{borderRadius:"7px"}}
+        >
         <img 
         src={require('../../Images/minus-icon.webp')}
         alt='minus' width="12px"height="12px"
@@ -24,7 +26,9 @@ export default function Counter(){
         {count}
         </Col>
         <Col>
-        <Button  onClick={()=>setCount(count+1)} variant='outline-primary'>
+        <Button  onClick={()=>setCount(count+1)} variant='outline-primary' size="sm"
+        style={{borderRadius:"7px"}}
+        >
         <img
         src={require('../../Images/plus-icon.webp')}
         alt='plus' width='12px' height='12px'
